@@ -42,7 +42,7 @@ class EditIndicator extends React.Component {
   handleSubmit ({formData}) {
     const component = this;
 
-    if (formData.data) {
+    if (formData.data && !formData.data.match(/^\w+\.\w+$/)) {
       formData.data = csvToJSON(formData.data);
     }
 
