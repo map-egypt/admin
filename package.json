@@ -1,7 +1,7 @@
 {
-  "name": "ifpri-egypt-data-entry",
+  "name": "ifpri-yemen-data-entry",
   "version": "1.0.0",
-  "description": "Enter data for ifpri-egypt api",
+  "description": "Enter data for ifpri-yemen api",
   "repository": {
     "type": "git",
     "url": "https://github.com/developmentseed/project-seed.git"

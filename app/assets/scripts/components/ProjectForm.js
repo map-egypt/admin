@@ -8,7 +8,7 @@ import CustomTextWidget from './widgets/CustomTextWidget';
 import CustomNumberWidget from './widgets/CustomNumberWidget';
 import Dropdown from './widgets/Dropdown';
 import {setMaybe, transformErrors} from '../utils/nullUtils';
-import {sdsLabels, sdgLabels} from '../utils/labels';
+import {sdgLabels} from '../utils/labels';
 
 export const schema = {
   type: 'object',
@@ -23,7 +23,6 @@ export const schema = {
     'planned_start_date',
     'published',
     'sdg_indicator',
-    'sds_indicator',
     'status'
   ],
   properties: {
@@ -107,16 +106,16 @@ export const schema = {
         number_served_unit_ar: {type: 'string', title: 'الفئة', 'description': 'مثال: الاسر المستفيدة'}
       }
     },
-    sds_indicator: {
-      title: 'SDS Goals - أهداف استراتيجية التنمية المُستدامة',
-      type: 'array',
-      items: {
-        title: 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
-        type: 'object',
-        required: ['en'],
-        properties: {en: {type: 'string', title: 'SDS Indicator'}, ar: {type: 'string'}}
-      }
-    },
+    // sds_indicator: {
+    //   title: 'SDS Goals - أهداف استراتيجية التنمية المُستدامة',
+    //   type: 'array',
+    //   items: {
+    //     title: 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
+    //     type: 'object',
+    //     required: ['en'],
+    //     properties: {en: {type: 'string', title: 'SDS Indicator'}, ar: {type: 'string'}}
+    //   }
+    // },
     sdg_indicator: {
       title: 'SDG Goals - أهداف التنمية المستدامة',
       type: 'array',
@@ -606,12 +605,14 @@ class ProjectForm extends React.Component {
           [
             'Planned',
             'Ongoing',
-            'Closed'
+            'Closed',
+            'Suspended/Halted'
           ],
           [
             'مُخطط',
             'جاري/ مستمر',
-            'مُغلق'
+            'مُغلق',
+            'معلق'
           ]
         ),
         'select-ministry': Dropdown('Responsible Ministry - الوزارة المسؤولة', 'Select a Ministry',
@@ -632,13 +633,13 @@ class ProjectForm extends React.Component {
             'الهيئة العامة لتنمية الثروة السمكية'
           ]
         ),
-        'select-sds_indicator': Dropdown(
-          'SDS Goal - هدف استراتيجية التنمية المُستدامة',
-          sdsLabels.select,
-          sdsLabels.en,
-          sdsLabels.ar,
-          true
-        ),
+        // 'select-sds_indicator': Dropdown(
+        //   'SDS Goal - هدف استراتيجية التنمية المُستدامة',
+        //   sdsLabels.select,
+        //   sdsLabels.en,
+        //   sdsLabels.ar,
+        //   true
+        // ),
         'select-sdg_indicator': Dropdown(
           'SDG Goal - هدف التنمية المستدامة',
           sdgLabels.select,
@@ -650,20 +651,20 @@ class ProjectForm extends React.Component {
           'Sub-sector - القطاع الفرعي',
           'Select a sub-sector - يُرحى اختيار قطاع فرعي',
           [
-            'Agriculture Extension & Research',
-            'Agro-industry, Marketing & Trade',
-            'Crops',
-            'Fishing, Aquaculture & Forestry',
-            'Livestock',
-            'Rural Infrastructure & Irrigation'
+            'Agriculture',
+            'Water',
+            'Trade & Employment',
+            'Health',
+            'Nutrition',
+            'Education'
           ],
           [
-            'الارشاد الزراعي والبحث',
-            'الصناعات الزراعية والتسويق والتجارة',
-            'المحاصيل',
-            'صيد الأسماك و الزراعة المائية وعلم التحريج',
-            'الثروة الحيوانية',
-            'البنية التحتية بالمناطق الريفية والري'
+            'الزراعة',
+            'المياه',
+            'التجارة و التوظيف',
+            'الصحة',
+            'التغذية',
+            'التعليم'
           ],
           true
         ),

@@ -45,12 +45,16 @@ export default class AuthService {
 
   loggedIn () {
     const token = this.getToken();
-    return !!token && !isTokenExpired(token) && isEditor(token);
+    return !!token && !isTokenExpired(token) && this.allowedAccess(token);
   }
 
   loggedInNotEditor () {
     const token = this.getToken();
-    return !!token && !isTokenExpired(token) && !(isEditor(token) || isAdmin(token));
+    return !!token && !isTokenExpired(token) && !this.allowedAccess(token);
+  }
+
+  allowedAccess (token) {
+    return isEditor(token) || isAdmin(token);
   }
 
   isAdmin () {

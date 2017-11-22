@@ -5,9 +5,9 @@ var logo = require('./logo');
  */
 module.exports = {
   environment: 'production',
-  auth0_token: process.env.AUTH0_TOKEN,
-  auth0_namespace: process.env.AUTH0_NAMESPACE,
-  api_root: process.env.API_ROOT,
+  auth0_token: 'aAMY6pWnvscb5VCePYnH9w1Grv7c7QpH',
+  auth0_namespace: 'ifpri-yemen-silo.auth0.com',
+  api_root: 'https://ifpri-yemen-silo.herokuapp.com',
   consoleMessage: logo
 };
 
