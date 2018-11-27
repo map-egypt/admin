@@ -28,7 +28,7 @@ const requireAuth = (nextState, replace) => {
 };
 
 const parseAuthHash = (nextState, replace) => {
-  auth.parseHash(nextState.location.hash);
+  auth.parseHash(`access_token=${nextState.params.access_token}`);
   replace({ pathname: '/' });
 };
 

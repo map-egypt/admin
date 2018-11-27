@@ -1,11 +1,11 @@
 import { isTokenExpired, isEditor, isAdmin, sub } from './jwtHelper';
 
 import reqwest from 'reqwest';
-import Auth0 from 'auth0-js';
+import auth0 from 'auth0-js';
 
 export default class AuthService {
   constructor (clientID, domain) {
-    this.auth0 = new Auth0({ clientID, domain, responseType: 'token' });
+    this.auth0 = new auth0.WebAuth({ clientID, domain, responseType: 'token id_token' });
 
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -37,10 +37,12 @@ export default class AuthService {
   }
 
   parseHash (hash) {
-    const authResult = this.auth0.parseHash(hash);
-    if (authResult && authResult.idToken) {
-      this.setToken(authResult.idToken);
-    }
+    this.auth0.parseHash({hash}, (err, authResult) => {
+      if (err) console.log(err);
+      if (authResult && authResult.idToken) {
+        this.setToken(authResult.idToken);
+      }
+    });
   }
 
   loggedIn () {
