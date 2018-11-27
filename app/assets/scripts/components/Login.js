@@ -19,7 +19,7 @@ class Login extends React.Component {
     this.props.auth.login({
       realm: 'Username-Password-Authentication',
       scope: 'openid roles',
-      redirectUri: window.location.origin,
+      redirectUri: window.location.origin + window.location.pathname,
       email: ReactDOM.findDOMNode(this.refs.email).value,
       password: ReactDOM.findDOMNode(this.refs.password).value
     }, function (err) {

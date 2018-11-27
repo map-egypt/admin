@@ -36,12 +36,14 @@ export default class AuthService {
     this.auth0.signup(params, onError);
   }
 
-  parseHash (hash) {
+  parseHash (hash, replace, callback) {
     this.auth0.parseHash({hash}, (err, authResult) => {
       if (err) console.log(err);
       if (authResult && authResult.idToken) {
         this.setToken(authResult.idToken);
       }
+      replace({ pathname: '/' });
+      callback();
     });
   }
 
