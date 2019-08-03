@@ -10,7 +10,7 @@ class Header extends React.Component {
         <div className="wrapper-content">
           <nav>
             <ul>
-              <li><Link to='/'> MAP Egypt Dashboard</Link></li>
+              <li><Link to='/'> MAP Yemen Dashboard</Link></li>
               <li><Link to='projects' className="browse-menu__item link--deco">Projects</Link></li>
               <li><Link to='indicators' className="browse-menu__item link--deco">Indicators</Link></li>
             </ul>

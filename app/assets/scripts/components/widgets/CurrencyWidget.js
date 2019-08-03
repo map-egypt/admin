@@ -81,6 +81,7 @@ export default class CurrencyField extends React.Component {
             <option value="THB">Thai Baht</option>
             <option value="TRY">Turkish Lira</option>
             <option value="USD">U.S. Dollar</option>
+            <option value="YER">Yemeni Rial</option>
           </select>
         </div>
         <div className="col-sm-4">

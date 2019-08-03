@@ -1,6 +1,6 @@
-# IFPRI Egypt Data Entry
+# IFPRI Yemen Data Entry
 
-Data Entry form for IFPRI backend. Authentication handled with Auth0.
+Data Entry form for IFPRI backend.  Authentication handled with Auth0.
 
 ## Development environment
 To set up the development environment for this website, you'll need to install the following on your system:

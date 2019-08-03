@@ -8,7 +8,7 @@ import CustomTextWidget from './widgets/CustomTextWidget';
 import CustomNumberWidget from './widgets/CustomNumberWidget';
 import Dropdown from './widgets/Dropdown';
 import {setMaybe, transformErrors} from '../utils/nullUtils';
-import {sdsLabels, sdgLabels} from '../utils/labels';
+import {sdgLabels} from '../utils/labels';
 
 export const schema = {
   type: 'object',
@@ -23,7 +23,6 @@ export const schema = {
     'planned_start_date',
     'published',
     'sdg_indicator',
-    'sds_indicator',
     'status'
   ],
   properties: {
@@ -107,16 +106,16 @@ export const schema = {
         number_served_unit_ar: {type: 'string', title: 'الفئة', 'description': 'مثال: الاسر المستفيدة'}
       }
     },
-    sds_indicator: {
-      title: 'SDS Goals - أهداف استراتيجية التنمية المُستدامة',
-      type: 'array',
-      items: {
-        title: 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
-        type: 'object',
-        required: ['en'],
-        properties: {en: {type: 'string', title: 'SDS Indicator'}, ar: {type: 'string'}}
-      }
-    },
+    // sds_indicator: {
+    //   title: 'SDS Goals - أهداف استراتيجية التنمية المُستدامة',
+    //   type: 'array',
+    //   items: {
+    //     title: 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
+    //     type: 'object',
+    //     required: ['en'],
+    //     properties: {en: {type: 'string', title: 'SDS Indicator'}, ar: {type: 'string'}}
+    //   }
+    // },
     sdg_indicator: {
       title: 'SDG Goals - أهداف التنمية المستدامة',
       type: 'array',
@@ -606,39 +605,57 @@ class ProjectForm extends React.Component {
           [
             'Planned',
             'Ongoing',
-            'Closed'
+            'Closed',
+            'Suspended/Halted'
           ],
           [
             'مُخطط',
             'جاري/ مستمر',
-            'مُغلق'
+            'مُغلق',
+            'معلق'
           ]
         ),
         'select-ministry': Dropdown('Responsible Ministry - الوزارة المسؤولة', 'Select a Ministry',
           [
-            'Ministry of Agriculture and Land Reclamation',
-            'Ministry of International Cooperation and Investment',
-            'Ministry of Environment – Egyptian Environment Affairs Agency',
-            'Ministry of Water Resources and Irrigation',
-            'Ministry of Trade and Industry',
-            'General Authority For Fish Resources Development'
+            'Ministry of Planning and International Cooperation',
+            'Ministry of Agriculture and Irrigation',
+            'Ministry of Water and Environment',
+            'Ministry of Local Administration',
+            'Ministry of Social Affairs and Labor',
+            'Ministry of Oil and Minerals',
+            'Ministry of Education',
+            'Ministry of Technical Education and Vocational Training',
+            'Ministry of Finance',
+            'Ministry of Electricity and Energy',
+            'Ministry of Public Health and Population',
+            'Ministry of Higher Education and Scientific Research',
+            'Ministry of Fish Wealth',
+            'Ministry of Industry and Trade'
           ],
           [
-            'وزارة الزراعة واستصلاح الأراضي',
-            'وزارة الاستثمار و التعاون الدولى',
-            'وزارة البيئة - جهاز شئون البيئة',
-            'وزارة الموارد المائية والراي',
-            'وزارة التجارة والصناعة',
-            'الهيئة العامة لتنمية الثروة السمكية'
+            'وزارة التخطيط والتعاون الدولي',
+            'وزارة الزراعة والري',
+            'وزارة المياه والبيئة',
+            'وزارة الإدارة المحلية',
+            'وزارة الشؤون الإجتماعية والعمل',
+            'وزارة النفط والمعادن',
+            'وزارة التربية والتعليم',
+            'وزارة التعليم الفني والتدريب المهني',
+            'وزارة المالية',
+            'وزارة الكهرباء والطاقة',
+            'وزارة الصحة العامة والسكان',
+            'وزارة التعليم العالي والبحث العلمي',
+            'وزارة الثروة السمكية',
+            'وزارة الصناعة والتجارة'
           ]
         ),
-        'select-sds_indicator': Dropdown(
-          'SDS Goal - هدف استراتيجية التنمية المُستدامة',
-          sdsLabels.select,
-          sdsLabels.en,
-          sdsLabels.ar,
-          true
-        ),
+        // 'select-sds_indicator': Dropdown(
+        //   'SDS Goal - هدف استراتيجية التنمية المُستدامة',
+        //   sdsLabels.select,
+        //   sdsLabels.en,
+        //   sdsLabels.ar,
+        //   true
+        // ),
         'select-sdg_indicator': Dropdown(
           'SDG Goal - هدف التنمية المستدامة',
           sdgLabels.select,
@@ -650,20 +667,28 @@ class ProjectForm extends React.Component {
           'Sub-sector - القطاع الفرعي',
           'Select a sub-sector - يُرحى اختيار قطاع فرعي',
           [
-            'Agriculture Extension & Research',
-            'Agro-industry, Marketing & Trade',
+            'Agriculture and food security',
+            'Health',
+            'Nutrition',
+            'Education',
+            'Rural Infrastructure and Irrigation',
             'Crops',
-            'Fishing, Aquaculture & Forestry',
             'Livestock',
-            'Rural Infrastructure & Irrigation'
+            'Agroindustry Marketing and Trade',
+            'Fisheries',
+            'Environment'
           ],
           [
-            'الارشاد الزراعي والبحث',
-            'الصناعات الزراعية والتسويق والتجارة',
+            'الزراعة والأمن الغذائي',
+            'الصحة',
+            'التغذية',
+            'التعليم',
+            'لبنية التحتية الريفية والري',
             'المحاصيل',
-            'صيد الأسماك و الزراعة المائية وعلم التحريج',
-            'الثروة الحيوانية',
-            'البنية التحتية بالمناطق الريفية والري'
+            'تربية الماشية',
+            'تسويق الصناعات الزراعية والتجارة',
+            'مصايد الأسماك',
+            'البيئة'
           ],
           true
         ),
