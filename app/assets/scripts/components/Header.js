@@ -11,7 +11,8 @@ class Header extends React.Component {
           <nav>
             <ul>
               <li><Link to='/'> MAP Egypt Dashboard</Link></li>
-              <li><Link to='projects' className="browse-menu__item link--deco">Projects</Link></li>
+              <li><Link to='projects/international' className="browse-menu__item link--deco">International Projects</Link></li>
+              <li><Link to='projects/domestic' className="browse-menu__item link--deco">Domestic Projects</Link></li>
               <li><Link to='indicators' className="browse-menu__item link--deco">Indicators</Link></li>
             </ul>
           </nav>

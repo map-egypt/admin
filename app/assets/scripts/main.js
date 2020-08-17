@@ -82,8 +82,9 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App} auth={auth}>
       <IndexRoute component={Index} onEnter={requireAuth} />
-      <Route path="projects" component={ProjectList} onEnter={requireAuth} />
-      <Route path="projects/new" component={NewProject} onEnter={requireAuth} />
+      <Route path="projects/international" component={() => <ProjectList auth={auth} type={'international'}/>} onEnter={requireAuth} />
+      <Route path="projects/domestic" component={() => <ProjectList auth={auth} type={'domestic'}/>} onEnter={requireAuth} />
+      <Route path="projects/:type(domestic|international)/new" component={NewProject} onEnter={requireAuth} />
       <Route path="projects/:id" component={Project} onEnter={requireAuth} />
       <Route path="projects/:id/edit" component={EditProject} onEnter={requireAuth} />
       <Route path="indicators" component={IndicatorList} onEnter={requireAuth} />

@@ -14,7 +14,7 @@ class ProjectList extends React.Component {
 
   componentWillMount () {
     const component = this;
-    component.props.auth.request(`${apiRoot}/projects`, 'get')
+    component.props.auth.request(`${apiRoot}/projects/${component.props.type}`, 'get')
       .then(function (resp) {
         let list = resp;
         let sub = component.props.auth.getSub();
@@ -79,8 +79,8 @@ class ProjectList extends React.Component {
     return (
       <div className="section">
         <div className="wrapper-content">
-          <h2 className="header-page-main">{ component.props.limit ? 'Recently Added ' : ''}Projects</h2>
-          <Link to='projects/new' className="btn button--primary button-section-header button--small">Add a Project</Link>
+          <h2 className="header-page-main">{ component.props.limit ? 'Recently Added ' : ''}{component.props.type} Projects</h2>
+          <Link to={`projects/${component.props.type}/new`} className="btn button--primary button-section-header button--small">Add a {component.props.type} Project</Link>
           <table className="table">
             <thead>
               <tr>

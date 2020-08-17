@@ -13,6 +13,9 @@ class NewProject extends React.Component {
   }
 
   constructor (props) {
+    if (!['domestic', 'international'].includes(props.params.type)){
+      throw new Error('Type error');
+    }
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,6 +23,7 @@ class NewProject extends React.Component {
 
   handleSubmit ({formData}) {
     const component = this;
+    formData.type = this.props.params.type;
     return this.props.auth.request(`${apiRoot}/projects`, 'post', {
       data: JSON.stringify(formData)
     }).then(function (resp) {
@@ -35,7 +39,7 @@ class NewProject extends React.Component {
     const component = this;
     return (
       <div className="wrapper-content width-medium">
-        <h1>Add a New Project</h1>
+        <h1>Add a New {this.props.params.type} Project</h1>
         <ProjectForm onSubmit={component.handleSubmit}>
           <Link className="btn button--base-bounded button-group" to="/">Cancel</Link>
         </ProjectForm>
