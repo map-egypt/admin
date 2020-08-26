@@ -260,7 +260,8 @@ export default class LocationFieldArray extends React.Component {
       const itemErrorSchema = errorSchema ? errorSchema[index] : undefined;
       const itemIdPrefix = idSchema.$id + '_' + index;
       const itemIdSchema = toIdSchema(itemSchema, itemIdPrefix, definitions);
-      return (<div key={item.key} className={'array-item'}>
+      // using index in key attribute because array didn't have unique key
+      return (<div key={index} className={'array-item'}>
 
         <div className={'col-xs-9'}>
           <LocationFieldItem
