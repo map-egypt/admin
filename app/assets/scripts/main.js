@@ -26,7 +26,17 @@ const requireAuth = (nextState, replace) => {
     replace({ pathname: '/login' });
   }
 };
-
+// create function to check type of editor
+const checkInterEditor = (nextState, replace) => {
+  if (!(auth.isInternationalEditor() || auth.isAdmin())) {
+    replace({ pathname: '/' });
+  }
+};
+const checkDomEditor = (nextState, replace) => {
+  if (!(auth.isDomesticEditor() || auth.isAdmin())) {
+    replace({ pathname: '/' });
+  }
+};
 const parseAuthHash = (nextState, replace, callback) => {
   auth.parseHash(`access_token=${nextState.params.access_token}`, replace, callback);
 };
@@ -69,7 +79,7 @@ class App extends React.Component {
     return (
       <div>
       {(component.props.route.auth.loggedIn()
-        ? <Header logout={component.logout}/>
+        ? <Header logout={component.logout} auth={component.props.route.auth}/>
         : ''
       )}
         {children}
@@ -82,8 +92,8 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App} auth={auth}>
       <IndexRoute component={Index} onEnter={requireAuth} />
-      <Route path="projects/international" component={() => <ProjectList auth={auth} type={'international'}/>} onEnter={requireAuth} />
-      <Route path="projects/domestic" component={() => <ProjectList auth={auth} type={'domestic'}/>} onEnter={requireAuth} />
+      <Route path="projects/international" component={() => <ProjectList auth={auth} type={'international'}/>} onEnter={checkInterEditor} />
+      <Route path="projects/domestic" component={() => <ProjectList auth={auth} type={'domestic'}/>} onEnter={checkDomEditor} />
       <Route path="projects/:type(domestic|international)/new" component={NewProject} onEnter={requireAuth} />
       <Route path="projects/:id" component={Project} onEnter={requireAuth} />
       <Route path="projects/:id/edit" component={EditProject} onEnter={requireAuth} />

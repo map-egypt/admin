@@ -24,6 +24,15 @@ class ProjectList extends React.Component {
             return project.owner === sub;
           });
         }
+        if (!component.props.auth.isDomesticEditor()) {
+          list = list.filter((project) => {
+            return project.owner === sub;
+          });
+        } if (!component.props.auth.isInternationalEditor()) {
+          list = list.filter((project) => {
+            return project.owner === sub;
+          });
+        }
 
         component.setState({
           list: list
@@ -75,12 +84,14 @@ class ProjectList extends React.Component {
       // filter out items if we have a limit
       return component.props.limit ? i < component.props.limit : true;
     });
-
+    const {auth, type, limit} = component.props;
     return (
       <div className="section">
         <div className="wrapper-content">
-          <h2 className="header-page-main">{ component.props.limit ? 'Recently Added ' : ''}{component.props.type} Projects</h2>
-          <Link to={`projects/${component.props.type}/new`} className="btn button--primary button-section-header button--small">Add a {component.props.type} Project</Link>
+          <h2 className="header-page-main">{ limit ? 'Recently Added ' : ''}{type} Projects</h2>
+          {type === 'international' ? (auth.isInternationalEditor() || auth.isAdmin()) && <Link to={`projects/${type}/new`} className="btn button--primary button-section-header button--small">Add a {type} Project</Link> : (auth.isDomesticEditor() || auth.isAdmin()) &&
+          <Link to={`projects/${type}/new`} className="btn button--primary button-section-header button--small">Add a {type} Project</Link>
+          }
           <table className="table">
             <thead>
               <tr>
@@ -96,9 +107,8 @@ class ProjectList extends React.Component {
               {listItems}
             </tbody>
           </table>
-          { component.props.limit // only show view all button if we have a limit
-            ? <Link to='projects' className="link--primary">View All</Link>
-            : ''
+          { (limit && list.length > limit) && // only show view all button if we have a limit
+           <Link to='projects' className="link--primary">View All</Link>
           }
         </div>
       </div>

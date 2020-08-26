@@ -23,9 +23,14 @@ export function isTokenExpired (token) {
   return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
 }
 
-export function isEditor (token) {
+// remove isEditor function & create isInternationalEditor and isDomesticEditor
+export function isInternationalEditor (token) {
   const decoded = decode(token);
-  return decoded.roles && decoded.roles.indexOf('edit') > -1;
+  return decoded.roles && decoded.roles.indexOf('international editor') > -1;
+}
+export function isDomesticEditor (token) {
+  const decoded = decode(token);
+  return decoded.roles && decoded.roles.indexOf('domestic editor') > -1;
 }
 
 export function isAdmin (token) {
