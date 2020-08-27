@@ -24,15 +24,6 @@ class ProjectList extends React.Component {
             return project.owner === sub;
           });
         }
-        if (!component.props.auth.isDomesticEditor()) {
-          list = list.filter((project) => {
-            return project.owner === sub;
-          });
-        } if (!component.props.auth.isInternationalEditor()) {
-          list = list.filter((project) => {
-            return project.owner === sub;
-          });
-        }
 
         component.setState({
           list: list

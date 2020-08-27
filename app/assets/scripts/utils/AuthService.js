@@ -1,4 +1,4 @@
-import { isTokenExpired, isInternationalEditor, isDomesticEditor, isAdmin, sub } from './jwtHelper';
+import { isTokenExpired, isInternationalEditor, isDomesticEditor, isAdmin, isEditor, sub } from './jwtHelper';
 
 import reqwest from 'reqwest';
 import auth0 from 'auth0-js';
@@ -48,12 +48,12 @@ export default class AuthService {
   }
   loggedIn () {
     const token = this.getToken();
-    return !!token && !isTokenExpired(token) && (isInternationalEditor(token) || isDomesticEditor(token));
+    return !!token && !isTokenExpired(token) && (isEditor(token) || isAdmin(token));
   }
 
   loggedInNotEditor () {
     const token = this.getToken();
-    return !!token && !isTokenExpired(token) && !((isInternationalEditor(token) || isDomesticEditor(token)) || isAdmin(token));
+    return !!token && !isTokenExpired(token) && !(isEditor(token) || isAdmin(token));
   }
 
   isAdmin () {
