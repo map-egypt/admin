@@ -49,11 +49,12 @@ class EditProject extends React.Component {
     });
   }
 
-  handleDelete () {
+  handleDelete (e) {
+    e.preventDefault(); // to prevent form submission
     const component = this;
     return component.props.auth.request(`${apiRoot}/projects/${component.state.id}`, 'delete')
       .then(function (resp) {
-        component.context.router.push('/projects');
+        component.context.router.push(`/projects/${component.state.project.type}`);
       }).fail(function (err, msg) {
         console.error('error', err, msg);
       });
