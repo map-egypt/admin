@@ -396,6 +396,7 @@ class ProjectForm extends React.Component {
       },
       published: {
         classNames: 'section-half',
+        'ui:disabled': !this.props.auth.isAdmin(),
         'ui:widget': 'radio'
       },
       private: {
