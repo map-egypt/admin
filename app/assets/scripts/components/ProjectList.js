@@ -37,7 +37,7 @@ class ProjectList extends React.Component {
       return (<div></div>);
     }
     const {list} = component.state;
-    list.sort((a, b) => moment(b.created_at) - moment(a.created_at));
+    list.sort((a, b) => a.name < b.name ? -1 : 1);
     const listItems = list.map((item) => {
       let locations;
       let categories;
