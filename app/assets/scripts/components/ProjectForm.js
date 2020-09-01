@@ -294,8 +294,8 @@ export const schema = {
       title: 'Monitoring report link - الرابط الالكتروني لتقرير الرصد',
       format: 'uri'
     },
-    recommendations: {type: 'string', title: 'Recommendations based on project experience'},
-    recommendations_ar: {type: 'string', title: 'توصيات بناء على خبرة المشروع'}
+    recommendations: {type: 'string', title: 'Project achievements and Recommendations based on project experience'},
+    recommendations_ar: {type: 'string', title: ' إنجازات المشروع و توصيات بناء على خبرة المشروع'}
   }
 };
 
