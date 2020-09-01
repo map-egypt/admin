@@ -12,7 +12,7 @@ class Header extends React.Component {
             <ul>
               <li><Link to='/'> MAP Egypt Dashboard</Link></li>
               {(auth.isAdmin() || auth.isInternationalEditor()) && <li><Link to='projects/international' className="browse-menu__item link--deco">International Projects</Link></li>}
-              {(auth.isAdmin() || auth.isDomesticEditor()) && <li><Link to='projects/domestic' className="browse-menu__item link--deco">Domestic Projects</Link></li>}
+              {(auth.isAdmin() || auth.isNationalEditor()) && <li><Link to='projects/national' className="browse-menu__item link--deco">National Projects</Link></li>}
               <li><Link to='indicators' className="browse-menu__item link--deco">Indicators</Link></li>
             </ul>
           </nav>

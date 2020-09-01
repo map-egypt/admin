@@ -27,13 +27,13 @@ export function isInternationalEditor (token) {
   const decoded = decode(token);
   return decoded.roles && decoded.roles.indexOf('international editor') > -1;
 }
-export function isDomesticEditor (token) {
+export function isNationalEditor (token) {
   const decoded = decode(token);
-  return decoded.roles && decoded.roles.indexOf('domestic editor') > -1;
+  return decoded.roles && decoded.roles.indexOf('national editor') > -1;
 }
 
 export function isEditor (token) {
-  return isInternationalEditor(token) || isDomesticEditor(token);
+  return isInternationalEditor(token) || isNationalEditor(token);
 }
 
 export function isAdmin (token) {

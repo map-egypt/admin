@@ -13,7 +13,7 @@ class NewProject extends React.Component {
   }
 
   constructor (props) {
-    if (!['domestic', 'international'].includes(props.params.type)){
+    if (!['national', 'international'].includes(props.params.type)) {
       throw new Error('Type error');
     }
     super(props);

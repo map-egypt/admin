@@ -80,7 +80,7 @@ class ProjectList extends React.Component {
       <div className="section">
         <div className="wrapper-content">
           <h2 className="header-page-main">{ limit ? 'Recently Added ' : ''}{type} Projects</h2>
-          {type === 'international' ? (auth.isInternationalEditor() || auth.isAdmin()) && <Link to={`projects/${type}/new`} className="btn button--primary button-section-header button--small">Add a {type} Project</Link> : (auth.isDomesticEditor() || auth.isAdmin()) &&
+          {type === 'international' ? (auth.isInternationalEditor() || auth.isAdmin()) && <Link to={`projects/${type}/new`} className="btn button--primary button-section-header button--small">Add a {type} Project</Link> : (auth.isNationalEditor() || auth.isAdmin()) &&
           <Link to={`projects/${type}/new`} className="btn button--primary button-section-header button--small">Add a {type} Project</Link>
           }
           <table className="table">
