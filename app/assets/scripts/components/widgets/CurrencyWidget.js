@@ -89,7 +89,7 @@ export default class CurrencyField extends React.Component {
             onChange={this.onChange('original')} />
         </div>
         <div className="col-sm-4">
-          <label>Exchange Rate - سعر الصرف * </label>
+          <label>Exchange Rate At Time Of Argeement - سعر الصرف * </label>
           <input className="form-control" type="number" value={rate} step="0.01"
             onChange={this.onChange('rate')} />
         </div>
