@@ -619,7 +619,7 @@ class ProjectForm extends React.Component {
           ],
           [
             'مُخطط',
-            'جاري/ مستمر',
+            'جارى',
             'مُغلق'
           ]
         ),
