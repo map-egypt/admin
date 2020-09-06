@@ -74,16 +74,26 @@ export const schema = {
       type: 'string'
     },
     project_delays_ar: {
-      title: 'حالات التأخير في المشروع', 'description': 'يرجى الإشارة إلى أي تأخيرات كبيرة في تنفيذ المشروع، و يرجى تحديد سبب هذا التأخير',
+      title: 'حالات التأخير في تنفيذ المشروع', 'description': 'يرجى الإشارة إلى أي تأخيرات كبيرة في تنفيذ المشروع، و يرجى تحديد سبب هذا التأخير',
       type: 'string'
     },
+    date_delay_occurrence: {type: 'string', title: 'Date Of Delay Occurrence - تاريخ حالة التأخير'},
     corrective_action: {
       type: 'string',
       title: 'Corrective Action'
     },
     corrective_action_ar: {
       type: 'string',
-      title: 'إجراءات تصحيحية'
+      title: 'الإجراء التصحيحى'
+    },
+    date_corrective_action: {type: 'string', title: 'Date Of Corrective Action -  تاريخ تنفيذ الإجراء التصحيحى'},
+    treat_corrective_action: {
+      type: 'string',
+      title: 'How did the corrective action remedy the delay encountered ?'
+    },
+    treat_corrective_action_ar: {
+      type: 'string',
+      title: 'كيف عالج الإجراء التصحيحى التأخير الذى واجهه المشروع'
     },
     status: {type: 'object', title: 'Project Status - وضع/ حالة المشروع', properties: {en: {type: 'string'}, ar: {type: 'string'}}},
     contract_date: {type: 'string', title: 'Contract Signed - تم توقيع العقد'},
@@ -389,10 +399,20 @@ class ProjectForm extends React.Component {
         'ui:field': 'textarea'
       },
       corrective_action: {
-        classNames: 'with-ar'
+        classNames: 'with-ar',
+        'ui:field': 'textarea'
       },
       corrective_action_ar: {
-        classNames: 'ar'
+        classNames: 'ar',
+        'ui:field': 'textarea'
+      },
+      treat_corrective_action: {
+        classNames: 'with-ar',
+        'ui:field': 'textarea'
+      },
+      treat_corrective_action_ar: {
+        classNames: 'ar',
+        'ui:field': 'textarea'
       },
       published: {
         classNames: 'section-half',
@@ -418,6 +438,14 @@ class ProjectForm extends React.Component {
       project_delays_ar: {
         classNames: 'ar',
         'ui:field': 'textarea'
+      },
+      date_delay_occurrence: {
+        classNames: 'form-extra-spacing',
+        'ui:field': 'short-date'
+      },
+      date_corrective_action: {
+        classNames: 'form-extra-spacing',
+        'ui:field': 'short-date'
       },
       local_manager: {
         classNames: 'section-half'
