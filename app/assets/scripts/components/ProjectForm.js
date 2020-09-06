@@ -253,20 +253,12 @@ export const schema = {
       }
     },
     kmi: {
-      title: 'Key Monitoring Indicators - مؤشرات الرصد الرئيسية',
+      title: 'Key Performance Indicators - مؤشرات الرصد الرئيسية',
       type: 'array',
       items: {
         type: 'object',
         required: ['status', 'target', 'kpi', 'component'],
         properties: {
-          kpi: {
-            type: 'string',
-            title: 'KPI'
-          },
-          kpi_ar: {
-            type: 'string',
-            title: 'مؤشرات الأداء الرئيسية'
-          },
           component: {
             title: 'Component',
             type: 'string'
@@ -274,6 +266,14 @@ export const schema = {
           component_ar: {
             title: 'المكون',
             type: 'string'
+          },
+          kpi: {
+            type: 'string',
+            title: 'KPI'
+          },
+          kpi_ar: {
+            type: 'string',
+            title: 'مؤشرات الأداء الرئيسية'
           },
           status: {
             title: 'Status',
@@ -284,13 +284,13 @@ export const schema = {
             type: 'string',
             title: 'Baseline - تقييم خط الأساس'
           },
-          current: {
-            type: 'string',
-            title: 'Current - التقييم الحالي'
-          },
           target: {
             type: 'string',
             title: 'Target - الهدف'
+          },
+          current: {
+            type: 'string',
+            title: 'Achieved - التقييم الحالي'
           },
           date: {
             type: 'string',
