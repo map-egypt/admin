@@ -8,7 +8,7 @@ import CustomTextWidget from './widgets/CustomTextWidget';
 import CustomNumberWidget from './widgets/CustomNumberWidget';
 import Dropdown from './widgets/Dropdown';
 import {setMaybe, transformErrors} from '../utils/nullUtils';
-import {sdsLabels, sdgLabels} from '../utils/labels';
+import {sdsLabels, sdgLabels, donorLabelsInter, donorLabelsArabicInter, funderLabelsNation, funderLabelsArabicNation} from '../utils/labels';
 
 export const schema = {
   type: 'object',
@@ -198,12 +198,15 @@ export const schema = {
             }
           },
           donor_name: {
-            type: 'string',
-            title: 'Donor or Contributor Name'
+            title: 'Donor or Contributor Name',
+            type: 'object',
+            required: ['en'],
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           donor_name_ar: {
-            type: 'string',
-            title: 'الجهة المانحة'
+            title: 'الجهة المانحة',
+            type: 'object',
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           type: {
             title: 'Type of Fund',
@@ -232,12 +235,14 @@ export const schema = {
             }
           },
           donor_name: {
-            type: 'string',
-            title: 'Donor Name'
+            title: 'Donor Name',
+            type: 'object',
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           donor_name_ar: {
-            type: 'string',
-            title: 'المانح'
+            title: 'المانح',
+            type: 'object',
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           type: {
             title: 'Type of Fund',
@@ -352,6 +357,14 @@ class ProjectForm extends React.Component {
     // get sub_sectors according to project type
     this.state.subSectors = props.projectType === 'international' ? InternationalSubSectors['en_sub_sector'] : DomesticSubSectors['en_sub_sector'];
     this.state.arabicsubSectors = props.projectType === 'international' ? InternationalSubSectors['ar_sub_sector'] : DomesticSubSectors['ar_sub_sector'];
+   // get donor name or funder name labels according to project type
+    this.state.donorName = props.projectType === 'international' ? donorLabelsInter.en : funderLabelsNation.en;
+    this.state.donorNameArabic = props.projectType === 'international' ? donorLabelsArabicInter.en : funderLabelsArabicNation.en;
+    // get title and select string according to project type
+    this.state.donorTitle = props.projectType === 'international' ? donorLabelsInter.title : funderLabelsNation.title;
+    this.state.donorTitleArabic = props.projectType === 'international' ? donorLabelsArabicInter.title : funderLabelsArabicNation.title;
+    this.state.donorSelect = props.projectType === 'international' ? donorLabelsInter.select : funderLabelsNation.select;
+    this.state.donorSelectArabic = props.projectType === 'international' ? donorLabelsArabicInter.select : funderLabelsArabicNation.select;
 
     this.state.uiSchema = {
       components: {
@@ -520,10 +533,12 @@ class ProjectForm extends React.Component {
           fund: {'ui:field': 'currency'},
           type: {'ui:field': 'select-disbursed-type'},
           donor_name: {
-            classNames: 'with-ar'
+            classNames: 'with-ar',
+            'ui:field': 'select-donor'
           },
           donor_name_ar: {
-            classNames: 'ar'
+            classNames: 'ar',
+            'ui:field': 'select-donor-arabic'
           }
         }
       },
@@ -534,10 +549,12 @@ class ProjectForm extends React.Component {
           date: {'ui:field': 'fund-date'},
           type: {'ui:field': 'select-disbursed-type'},
           donor_name: {
-            classNames: 'with-ar'
+            classNames: 'with-ar',
+            'ui:field': 'select-donor'
           },
           donor_name_ar: {
-            classNames: 'ar'
+            classNames: 'ar',
+            'ui:field': 'select-donor-arabic'
           }
         }
       },
@@ -619,8 +636,7 @@ class ProjectForm extends React.Component {
   }
 
   render () {
-    const {schema, formData, isDraft, subSectors, arabicsubSectors} = this.state;
-
+    const {schema, formData, isDraft, subSectors, arabicsubSectors, donorName, donorNameArabic, donorTitle, donorTitleArabic, donorSelect, donorSelectArabic} = this.state;
     return <Form schema={schema}
       onSubmit={this.onSubmit.bind(this)}
       formData={formData}
@@ -688,6 +704,18 @@ class ProjectForm extends React.Component {
           'Select a sub-sector - يُرحى اختيار قطاع فرعي',
           subSectors,
           arabicsubSectors,
+          true
+        ),
+        'select-donor': Dropdown(
+          donorTitle,
+          donorSelect,
+          donorName,
+          true
+        ),
+        'select-donor-arabic': Dropdown(
+          donorTitleArabic,
+          donorSelectArabic,
+          donorNameArabic,
           true
         ),
         'select-disbursed-type': Dropdown(

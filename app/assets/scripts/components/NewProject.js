@@ -39,8 +39,8 @@ class NewProject extends React.Component {
     const component = this;
     return (
       <div className="wrapper-content width-medium">
-        <h1>Add a New {this.props.params.type} Project</h1>
-        <ProjectForm onSubmit={component.handleSubmit} auth={component.props.auth}>
+        <h1>Add a New {component.props.params.type} Project</h1>
+        <ProjectForm onSubmit={component.handleSubmit} auth={component.props.auth} projectType={component.props.params.type}>
           <Link className="btn button--base-bounded button-group" to="/">Cancel</Link>
         </ProjectForm>
      </div>
