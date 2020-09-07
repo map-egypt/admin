@@ -507,7 +507,8 @@ class ProjectForm extends React.Component {
         'ui:field': 'select-ministry'
       },
       project_link: {
-        'ui:placeholder': 'http://'
+        'ui:placeholder': 'http://',
+        'ui:disabled': props.projectType !== 'national'
       },
       location: {
         classNames: 'form-block multiform-group',
@@ -583,7 +584,8 @@ class ProjectForm extends React.Component {
       },
       reportLink: {
         title: 'Report link',
-        'ui:placeholder': 'http://'
+        'ui:placeholder': 'http://',
+        'ui:disabled': props.projectType !== 'national'
       },
       recommendations: {
         classNames: 'with-ar',
