@@ -175,5 +175,35 @@ module.exports = {
     'title': 'الجهة ',
     'select': 'يُرجى اختيار الجهة المانحة ',
     'en': []
+  },
+  fundLabelsInter: {
+    'en': [
+      'Loan',
+      'Grant',
+      'Local Contribution'
+    ],
+    'ar': [
+      'قرض',
+      'منحة',
+      'مساهمة محلية'
+    ]
+  },
+  fundLabelsNational: {
+    'en': [
+      'Government Budget Allocation',
+      'In-kind',
+      'Loan',
+      'Private Sector',
+      'Local Non-Profit Organization',
+      'Grant'
+    ],
+    'ar': [
+      'تخصيص من الميزانية الحكومية',
+      'عينيًا',
+      'قرض',
+      'قطاع خاص',
+      'جهة محلية غير هادفة للربح',
+      'منحة'
+    ]
   }
 };

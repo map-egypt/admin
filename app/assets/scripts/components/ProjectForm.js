@@ -8,7 +8,7 @@ import CustomTextWidget from './widgets/CustomTextWidget';
 import CustomNumberWidget from './widgets/CustomNumberWidget';
 import Dropdown from './widgets/Dropdown';
 import {setMaybe, transformErrors} from '../utils/nullUtils';
-import {sdsLabels, sdgLabels, donorLabelsInter, donorLabelsArabicInter, funderLabelsNation, funderLabelsArabicNation} from '../utils/labels';
+import {sdsLabels, sdgLabels, donorLabelsInter, donorLabelsArabicInter, funderLabelsNation, funderLabelsArabicNation, fundLabelsInter, fundLabelsNational} from '../utils/labels';
 
 export const schema = {
   type: 'object',
@@ -365,6 +365,9 @@ class ProjectForm extends React.Component {
     this.state.donorTitleArabic = props.projectType === 'international' ? donorLabelsArabicInter.title : funderLabelsArabicNation.title;
     this.state.donorSelect = props.projectType === 'international' ? donorLabelsInter.select : funderLabelsNation.select;
     this.state.donorSelectArabic = props.projectType === 'international' ? donorLabelsArabicInter.select : funderLabelsArabicNation.select;
+    // get type of fund according to project type
+    this.state.typeFund = props.projectType === 'international' ? fundLabelsInter.en : fundLabelsNational.en;
+    this.state.typeFundArabic = props.projectType === 'international' ? fundLabelsInter.ar : fundLabelsNational.ar;
 
     this.state.uiSchema = {
       components: {
@@ -638,7 +641,7 @@ class ProjectForm extends React.Component {
   }
 
   render () {
-    const {schema, formData, isDraft, subSectors, arabicsubSectors, donorName, donorNameArabic, donorTitle, donorTitleArabic, donorSelect, donorSelectArabic} = this.state;
+    const {schema, formData, isDraft, subSectors, arabicsubSectors, donorName, donorNameArabic, donorTitle, donorTitleArabic, donorSelect, donorSelectArabic, typeFund, typeFundArabic} = this.state;
     return <Form schema={schema}
       onSubmit={this.onSubmit.bind(this)}
       formData={formData}
@@ -721,10 +724,10 @@ class ProjectForm extends React.Component {
           true
         ),
         'select-disbursed-type': Dropdown(
-          'Type of Fund',
-          'Select type of fund',
-          ['Loan', 'Grant', 'Local Contribution'],
-          ['قرض', 'منحة', 'مساهمة محلية']
+          'Type of Fund - نوع التمويل',
+          'Select type of fund - يُرجى إختيار نوع التمويل',
+          typeFund,
+          typeFundArabic
         ),
         'select-kmi_status': Dropdown('Status', 'Select a status - يُرجى اختيار الوضع/ الحالة',
           ['Not Implemented', 'Partially Implemented', 'Implemented', 'N/A'],
