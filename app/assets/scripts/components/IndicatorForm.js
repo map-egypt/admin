@@ -52,7 +52,11 @@ export const schema = {
     },
     units: {
       type: 'string',
-      title: 'Unit - وحدة القياس'
+      title: 'Unit'
+    },
+    units_ar: {
+      type: 'string',
+      title: 'وحدة القياس'
     },
     data_geography: {
       title: 'Data Geography',
@@ -94,6 +98,9 @@ const uiSchema = {
   private: {
     classNames: 'section-half section-half-left',
     'ui:widget': 'radio'
+  },
+  units_ar: {
+    classNames: 'ar'
   },
   data_geography: {
     'ui:widget': 'radio',
