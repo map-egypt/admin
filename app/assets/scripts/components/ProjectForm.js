@@ -8,7 +8,7 @@ import CustomTextWidget from './widgets/CustomTextWidget';
 import CustomNumberWidget from './widgets/CustomNumberWidget';
 import Dropdown from './widgets/Dropdown';
 import {setMaybe, transformErrors} from '../utils/nullUtils';
-import {sdsLabels, sdgLabels} from '../utils/labels';
+import {sdsLabels, sdgLabels, donorLabelsInter, donorLabelsArabicInter, funderLabelsNation, funderLabelsArabicNation, fundLabelsInter, fundLabelsNational} from '../utils/labels';
 
 export const schema = {
   type: 'object',
@@ -74,16 +74,26 @@ export const schema = {
       type: 'string'
     },
     project_delays_ar: {
-      title: 'حالات التأخير في المشروع', 'description': 'يرجى الإشارة إلى أي تأخيرات كبيرة في تنفيذ المشروع، و يرجى تحديد سبب هذا التأخير',
+      title: 'حالات التأخير في تنفيذ المشروع', 'description': 'يرجى الإشارة إلى أي تأخيرات كبيرة في تنفيذ المشروع، و يرجى تحديد سبب هذا التأخير',
       type: 'string'
     },
+    date_delay_occurrence: {type: 'string', title: 'Date Of Delay Occurrence - تاريخ حالة التأخير'},
     corrective_action: {
       type: 'string',
       title: 'Corrective Action'
     },
     corrective_action_ar: {
       type: 'string',
-      title: 'إجراءات تصحيحية'
+      title: 'الإجراء التصحيحى'
+    },
+    date_corrective_action: {type: 'string', title: 'Date Of Corrective Action -  تاريخ تنفيذ الإجراء التصحيحى'},
+    treat_corrective_action: {
+      type: 'string',
+      title: 'How did the corrective action remedy the delay encountered ?'
+    },
+    treat_corrective_action_ar: {
+      type: 'string',
+      title: 'كيف عالج الإجراء التصحيحى التأخير الذى واجهه المشروع'
     },
     status: {type: 'object', title: 'Project Status - وضع/ حالة المشروع', properties: {en: {type: 'string'}, ar: {type: 'string'}}},
     contract_date: {type: 'string', title: 'Contract Signed - تم توقيع العقد'},
@@ -188,12 +198,15 @@ export const schema = {
             }
           },
           donor_name: {
-            type: 'string',
-            title: 'Donor or Contributor Name'
+            title: 'Donor or Contributor Name',
+            type: 'object',
+            required: ['en'],
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           donor_name_ar: {
-            type: 'string',
-            title: 'الجهة المانحة'
+            title: 'الجهة المانحة',
+            type: 'object',
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           type: {
             title: 'Type of Fund',
@@ -222,12 +235,14 @@ export const schema = {
             }
           },
           donor_name: {
-            type: 'string',
-            title: 'Donor Name'
+            title: 'Donor Name',
+            type: 'object',
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           donor_name_ar: {
-            type: 'string',
-            title: 'المانح'
+            title: 'المانح',
+            type: 'object',
+            properties: {en: {type: 'string'}, ar: {type: 'string'}}
           },
           type: {
             title: 'Type of Fund',
@@ -243,20 +258,12 @@ export const schema = {
       }
     },
     kmi: {
-      title: 'Key Monitoring Indicators - مؤشرات الرصد الرئيسية',
+      title: 'Key Performance Indicators - مؤشرات الرصد الرئيسية',
       type: 'array',
       items: {
         type: 'object',
         required: ['status', 'target', 'kpi', 'component'],
         properties: {
-          kpi: {
-            type: 'string',
-            title: 'KPI'
-          },
-          kpi_ar: {
-            type: 'string',
-            title: 'مؤشرات الأداء الرئيسية'
-          },
           component: {
             title: 'Component',
             type: 'string'
@@ -264,6 +271,14 @@ export const schema = {
           component_ar: {
             title: 'المكون',
             type: 'string'
+          },
+          kpi: {
+            type: 'string',
+            title: 'KPI'
+          },
+          kpi_ar: {
+            type: 'string',
+            title: 'مؤشرات الأداء الرئيسية'
           },
           status: {
             title: 'Status',
@@ -274,13 +289,13 @@ export const schema = {
             type: 'string',
             title: 'Baseline - تقييم خط الأساس'
           },
-          current: {
-            type: 'string',
-            title: 'Current - التقييم الحالي'
-          },
           target: {
             type: 'string',
             title: 'Target - الهدف'
+          },
+          current: {
+            type: 'string',
+            title: 'Achieved - التقييم الحالي'
           },
           date: {
             type: 'string',
@@ -294,8 +309,8 @@ export const schema = {
       title: 'Monitoring report link - الرابط الالكتروني لتقرير الرصد',
       format: 'uri'
     },
-    recommendations: {type: 'string', title: 'Recommendations based on project experience'},
-    recommendations_ar: {type: 'string', title: 'توصيات بناء على خبرة المشروع'}
+    recommendations: {type: 'string', title: 'Project achievements and Recommendations based on project experience'},
+    recommendations_ar: {type: 'string', title: ' إنجازات المشروع و توصيات بناء على خبرة المشروع'}
   }
 };
 
@@ -342,6 +357,17 @@ class ProjectForm extends React.Component {
     // get sub_sectors according to project type
     this.state.subSectors = props.projectType === 'international' ? InternationalSubSectors['en_sub_sector'] : DomesticSubSectors['en_sub_sector'];
     this.state.arabicsubSectors = props.projectType === 'international' ? InternationalSubSectors['ar_sub_sector'] : DomesticSubSectors['ar_sub_sector'];
+   // get donor name or funder name labels according to project type
+    this.state.donorName = props.projectType === 'international' ? donorLabelsInter.en : funderLabelsNation.en;
+    this.state.donorNameArabic = props.projectType === 'international' ? donorLabelsArabicInter.en : funderLabelsArabicNation.en;
+    // get title and select string according to project type
+    this.state.donorTitle = props.projectType === 'international' ? donorLabelsInter.title : funderLabelsNation.title;
+    this.state.donorTitleArabic = props.projectType === 'international' ? donorLabelsArabicInter.title : funderLabelsArabicNation.title;
+    this.state.donorSelect = props.projectType === 'international' ? donorLabelsInter.select : funderLabelsNation.select;
+    this.state.donorSelectArabic = props.projectType === 'international' ? donorLabelsArabicInter.select : funderLabelsArabicNation.select;
+    // get type of fund according to project type
+    this.state.typeFund = props.projectType === 'international' ? fundLabelsInter.en : fundLabelsNational.en;
+    this.state.typeFundArabic = props.projectType === 'international' ? fundLabelsInter.ar : fundLabelsNational.ar;
 
     this.state.uiSchema = {
       components: {
@@ -389,10 +415,20 @@ class ProjectForm extends React.Component {
         'ui:field': 'textarea'
       },
       corrective_action: {
-        classNames: 'with-ar'
+        classNames: 'with-ar',
+        'ui:field': 'textarea'
       },
       corrective_action_ar: {
-        classNames: 'ar'
+        classNames: 'ar',
+        'ui:field': 'textarea'
+      },
+      treat_corrective_action: {
+        classNames: 'with-ar',
+        'ui:field': 'textarea'
+      },
+      treat_corrective_action_ar: {
+        classNames: 'ar',
+        'ui:field': 'textarea'
       },
       published: {
         classNames: 'section-half',
@@ -418,6 +454,14 @@ class ProjectForm extends React.Component {
       project_delays_ar: {
         classNames: 'ar',
         'ui:field': 'textarea'
+      },
+      date_delay_occurrence: {
+        classNames: 'form-extra-spacing',
+        'ui:field': 'short-date'
+      },
+      date_corrective_action: {
+        classNames: 'form-extra-spacing',
+        'ui:field': 'short-date'
       },
       local_manager: {
         classNames: 'section-half'
@@ -466,7 +510,8 @@ class ProjectForm extends React.Component {
         'ui:field': 'select-ministry'
       },
       project_link: {
-        'ui:placeholder': 'http://'
+        'ui:placeholder': 'http://',
+        'ui:disabled': props.projectType !== 'national'
       },
       location: {
         classNames: 'form-block multiform-group',
@@ -492,10 +537,12 @@ class ProjectForm extends React.Component {
           fund: {'ui:field': 'currency'},
           type: {'ui:field': 'select-disbursed-type'},
           donor_name: {
-            classNames: 'with-ar'
+            classNames: 'with-ar',
+            'ui:field': 'select-donor'
           },
           donor_name_ar: {
-            classNames: 'ar'
+            classNames: 'ar',
+            'ui:field': 'select-donor-arabic'
           }
         }
       },
@@ -506,10 +553,12 @@ class ProjectForm extends React.Component {
           date: {'ui:field': 'fund-date'},
           type: {'ui:field': 'select-disbursed-type'},
           donor_name: {
-            classNames: 'with-ar'
+            classNames: 'with-ar',
+            'ui:field': 'select-donor'
           },
           donor_name_ar: {
-            classNames: 'ar'
+            classNames: 'ar',
+            'ui:field': 'select-donor-arabic'
           }
         }
       },
@@ -538,7 +587,8 @@ class ProjectForm extends React.Component {
       },
       reportLink: {
         title: 'Report link',
-        'ui:placeholder': 'http://'
+        'ui:placeholder': 'http://',
+        'ui:disabled': props.projectType !== 'national'
       },
       recommendations: {
         classNames: 'with-ar',
@@ -591,8 +641,7 @@ class ProjectForm extends React.Component {
   }
 
   render () {
-    const {schema, formData, isDraft, subSectors, arabicsubSectors} = this.state;
-
+    const {schema, formData, isDraft, subSectors, arabicsubSectors, donorName, donorNameArabic, donorTitle, donorTitleArabic, donorSelect, donorSelectArabic, typeFund, typeFundArabic} = this.state;
     return <Form schema={schema}
       onSubmit={this.onSubmit.bind(this)}
       formData={formData}
@@ -619,7 +668,7 @@ class ProjectForm extends React.Component {
           ],
           [
             'مُخطط',
-            'جاري/ مستمر',
+            'جارى',
             'مُغلق'
           ]
         ),
@@ -662,11 +711,23 @@ class ProjectForm extends React.Component {
           arabicsubSectors,
           true
         ),
+        'select-donor': Dropdown(
+          donorTitle,
+          donorSelect,
+          donorName,
+          true
+        ),
+        'select-donor-arabic': Dropdown(
+          donorTitleArabic,
+          donorSelectArabic,
+          donorNameArabic,
+          true
+        ),
         'select-disbursed-type': Dropdown(
-          'Type of Fund',
-          'Select type of fund',
-          ['Loan', 'Grant', 'Local Contribution'],
-          ['قرض', 'منحة', 'مساهمة محلية']
+          'Type of Fund - نوع التمويل',
+          'Select type of fund - يُرجى إختيار نوع التمويل',
+          typeFund,
+          typeFundArabic
         ),
         'select-kmi_status': Dropdown('Status', 'Select a status - يُرجى اختيار الوضع/ الحالة',
           ['Not Implemented', 'Partially Implemented', 'Implemented', 'N/A'],

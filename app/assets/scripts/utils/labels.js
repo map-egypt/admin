@@ -92,5 +92,118 @@ module.exports = {
       'البيئة'
     ],
     'select': 'Select Other Development Indicator'
+  },
+  donorLabelsInter: {
+    'title': 'Donor or Contributor Name',
+    'select': 'Select Donor or Contributor Name',
+    'en': [
+      'African Development Bank ',
+      'Agence Française de Développement (French Development Agency) ',
+      'Agricultural Research and Development Fund ',
+      'Danish International Development Agency ',
+      'Department of Foreign Affairs, Trade and Development, Canada ',
+      'Deutsche Gesellschaft für Internationale Zusammenarbeit (German Corporation for International Cooperation) ',
+      'European Bank for Reconstruction and Development ',
+      'European Investment Bank ',
+      'European Union - Joint Rural Development Program  ',
+      'Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung (Federal Ministry of Economic Cooperation and Development) ',
+      'Food and Agriculture Organization of the United Nations ',
+      'International Fund for Agricultural Development ',
+      'International Labor Organization ',
+      'Islamic Development Bank ',
+      'Italian Agency for Development Cooperation  ',
+      'Italian Debt Swap  ',
+      'Japan International Cooperation Agency ',
+      'Kreditanstalt für Wiederaufbau ',
+      'Social Fund for Development, Egypt ',
+      'Swiss Development Cooperation ',
+      'United Nations Development Funds for Women ',
+      'United Nations Development Programme ',
+      'United Nations Industrial Development Organization ',
+      'United States Agency for International Development  ',
+      'World Bank ',
+      'World Food Program ',
+      'WorldFish ',
+      'Project Beneficiaries ',
+      'Government of Egypt'
+    ]
+  },
+  donorLabelsArabicInter: {
+    'title': 'الجهة المانحة',
+    'select': 'يُرجى اختيار الجهة المانحة ',
+    'en': [
+      'البنك الإفريقي للتنمية',
+      'الوكالة الفرنسية للتنمية',
+      'صندوق البحوث و التنمية الزراعية',
+      'الوكالة الدانماركية للتنمية الدولية',
+      'وزارة الشؤون الخارجية والتجارة والتنمية, كندا',
+      'المؤسسة الألمانية للتعاون الدولي',
+      'البنك الأوروبي لإعادة البناء والتنمية',
+      'بنك الاستثمار الأوروبي',
+      'الاتحاد الأوروبي ',
+      'برنامج الاتحاد الأوروبي المشترك للتنمية الريفية',
+      'الوزارة الاتحادية للتعاون الاقتصادي والتنمية',
+      'منظمة الأغذية والزراعة',
+      'الصندوق الدولي للتنمية الزراعية',
+      'منظمة العمل الدولية ',
+      ' البنك الإسلامي للتنمية',
+      'الوكالة الايطالية للتنمية و التعاون / التعاون الايطالي',
+      'الوكالة اليابانية للتعاون الدولي',
+      'صندوق التنمية الإجتماعية اليابانية ',
+      'بنك الائتمان لإعادة الإعمار',
+      'الصندوق الاجتماعي للتنمية, مصر',
+      'الوكالة السويسرية للتعاون الدولي',
+      'صندوق الأمم المتحدة الإنمائي للمرأة ',
+      'برنامج الأمم المتحدة الإنمائي',
+      'منظمة الأمم المتحدة للتنمية الصناعية ',
+      'الوكالة الامريكية للتنمية الدولية',
+      'البنك الدولي',
+      'برنامج الأغذية العالمي',
+      'المركز الدولي للأسماك',
+      'مستفيدين المشروع ',
+      'الحكومة المصرية '
+
+    ],
+    'ar': []
+  },
+  funderLabelsNation: {
+    'title': 'Funder or Contributor Name',
+    'select': 'Select Funder or Contributor Name',
+    'en': []
+  },
+  funderLabelsArabicNation: {
+    'title': 'الجهة الممولة ',
+    'select': 'يُرجى اختيار الجهة الممولة ',
+    'en': []
+  },
+  fundLabelsInter: {
+    'en': [
+      'Loan',
+      'Grant',
+      'Local Contribution'
+    ],
+    'ar': [
+      'قرض',
+      'منحة',
+      'مساهمة محلية'
+    ]
+  },
+  fundLabelsNational: {
+    'en': [
+      'Government Budget Allocation',
+      'In-kind',
+      'Loan',
+      'Private Sector',
+      'Local Non-Profit Organization',
+      'Grant'
+    ],
+    'ar': [
+      'تخصيص من الميزانية الحكومية',
+      'عينيًا',
+      'قرض',
+      'قطاع خاص',
+      'جهة محلية غير هادفة للربح',
+      'منحة'
+    ]
   }
 };

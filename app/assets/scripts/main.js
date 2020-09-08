@@ -32,8 +32,8 @@ const checkInterEditor = (nextState, replace) => {
     replace({ pathname: '/' });
   }
 };
-const checkDomEditor = (nextState, replace) => {
-  if (!(auth.isDomesticEditor() || auth.isAdmin())) {
+const checknationalEditor = (nextState, replace) => {
+  if (!(auth.isNationalEditor() || auth.isAdmin())) {
     replace({ pathname: '/' });
   }
 };
@@ -93,8 +93,8 @@ ReactDOM.render(
     <Route path="/" component={App} auth={auth}>
       <IndexRoute component={Index} onEnter={requireAuth} />
       <Route path="projects/international" component={() => <ProjectList auth={auth} type={'international'}/>} onEnter={checkInterEditor} />
-      <Route path="projects/domestic" component={() => <ProjectList auth={auth} type={'domestic'}/>} onEnter={checkDomEditor} />
-      <Route path="projects/:type(domestic|international)/new" component={NewProject} onEnter={requireAuth} />
+      <Route path="projects/national" component={() => <ProjectList auth={auth} type={'national'}/>} onEnter={checknationalEditor} />
+      <Route path="projects/:type(national|international)/new" component={NewProject} onEnter={requireAuth} />
       <Route path="projects/:id" component={Project} onEnter={requireAuth} />
       <Route path="projects/:id/edit" component={EditProject} onEnter={requireAuth} />
       <Route path="indicators" component={IndicatorList} onEnter={requireAuth} />
