@@ -172,8 +172,8 @@ module.exports = {
     'en': []
   },
   funderLabelsArabicNation: {
-    'title': 'الجهة ',
-    'select': 'يُرجى اختيار الجهة المانحة ',
+    'title': 'الجهة الممولة ',
+    'select': 'يُرجى اختيار الجهة الممولة ',
     'en': []
   },
   fundLabelsInter: {
