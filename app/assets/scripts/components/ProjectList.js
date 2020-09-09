@@ -99,7 +99,7 @@ class ProjectList extends React.Component {
             </tbody>
           </table>
           { (limit && list.length > limit) && // only show view all button if we have a limit
-           <Link to='projects' className="link--primary">View All</Link>
+           <Link to={`projects/${type}`} className="link--primary">View All</Link>
           }
         </div>
       </div>
