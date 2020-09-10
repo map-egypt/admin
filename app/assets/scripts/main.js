@@ -37,6 +37,11 @@ const checknationalEditor = (nextState, replace) => {
     replace({ pathname: '/' });
   }
 };
+const checkIndicatorsEditor = (nextState, replace) => {
+  if (!(auth.isIndicatorEditor() || auth.isAdmin())) {
+    replace({ pathname: '/' });
+  }
+};
 const parseAuthHash = (nextState, replace, callback) => {
   auth.parseHash(`access_token=${nextState.params.access_token}`, replace, callback);
 };
@@ -97,10 +102,10 @@ ReactDOM.render(
       <Route path="projects/:type(national|international)/new" component={NewProject} onEnter={requireAuth} />
       <Route path="projects/:id" component={Project} onEnter={requireAuth} />
       <Route path="projects/:id/edit" component={EditProject} onEnter={requireAuth} />
-      <Route path="indicators" component={IndicatorList} onEnter={requireAuth} />
-      <Route path="indicators/new" component={NewIndicator} onEnter={requireAuth} />
-      <Route path="indicators/:id" component={Indicator} onEnter={requireAuth} />
-      <Route path="indicators/:id/edit" component={EditIndicator} onEnter={requireAuth} />
+      <Route path="indicators" component={IndicatorList} onEnter={checkIndicatorsEditor} />
+      <Route path="indicators/new" component={NewIndicator} onEnter={checkIndicatorsEditor} />
+      <Route path="indicators/:id" component={Indicator} onEnter={checkIndicatorsEditor} />
+      <Route path="indicators/:id/edit" component={EditIndicator} onEnter={checkIndicatorsEditor} />
       <Route path="login" component={Login} onEnter={alreadyAuth} />
       <Route path="access_token=:access_token" onEnter={parseAuthHash} />
     </Route>

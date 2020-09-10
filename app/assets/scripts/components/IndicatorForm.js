@@ -23,6 +23,7 @@ export const schema = {
     published: {
       title: 'Visibility - مدى وضوح المشروع',
       type: 'boolean',
+      default: false,
       enumNames: ['Published - تم النشر/ الاصدار', 'Draft - مسودة (نسخة أولية)']
     },
     category: {
@@ -70,53 +71,6 @@ export const schema = {
   }
 };
 
-const uiSchema = {
-  name: {
-    classNames: 'section-half'
-  },
-  name_ar: {
-    classNames: 'ar section-half section-half-left'
-  },
-  description: {
-    classNames: 'with-ar',
-    'ui:widget': 'textarea'
-  },
-  sources: {
-    classNames: 'multiform-group form-block'
-  },
-  description_ar: {
-    classNames: 'ar',
-    'ui:widget': 'textarea'
-  },
-  category: {
-    'ui:field': 'datatype'
-  },
-  published: {
-    'ui:widget': 'radio',
-    classNames: 'section-half'
-  },
-  private: {
-    classNames: 'section-half section-half-left',
-    'ui:widget': 'radio'
-  },
-  units_ar: {
-    classNames: 'ar'
-  },
-  data_geography: {
-    'ui:widget': 'radio',
-    classNames: 'section-half'
-  },
-  data: {
-    'ui:widget': 'textarea',
-    classNames: 'large'
-  },
-  themes: {
-    items: {
-      'ui:field': 'themefield'
-    }
-  }
-};
-
 const validate = function validate (formData, errors) {
   // If there is form data and it doesn't look like a mapbox id
   if (formData.data && !formData.data.match(/^\w+\.\w+$/)) {
@@ -135,6 +89,54 @@ class IndicatorForm extends React.Component {
   }
 
   render () {
+    const uiSchema = {
+      name: {
+        classNames: 'section-half'
+      },
+      name_ar: {
+        classNames: 'ar section-half section-half-left'
+      },
+      description: {
+        classNames: 'with-ar',
+        'ui:widget': 'textarea'
+      },
+      sources: {
+        classNames: 'multiform-group form-block'
+      },
+      description_ar: {
+        classNames: 'ar',
+        'ui:widget': 'textarea'
+      },
+      category: {
+        'ui:field': 'datatype'
+      },
+      published: {
+        'ui:widget': 'radio',
+        'ui:disabled': !this.props.auth.isAdmin(),
+        classNames: 'section-half'
+      },
+      private: {
+        classNames: 'section-half section-half-left',
+        'ui:widget': 'radio'
+      },
+      units_ar: {
+        classNames: 'ar'
+      },
+      data_geography: {
+        'ui:widget': 'radio',
+        classNames: 'section-half'
+      },
+      data: {
+        'ui:widget': 'textarea',
+        classNames: 'large'
+      },
+      themes: {
+        items: {
+          'ui:field': 'themefield'
+        }
+      }
+    };
+
     return <Form schema={schema}
       onSubmit={this.props.onSubmit}
       onChange={this.props.onChange}

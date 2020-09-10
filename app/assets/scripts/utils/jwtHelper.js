@@ -33,7 +33,11 @@ export function isNationalEditor (token) {
 }
 
 export function isEditor (token) {
-  return isInternationalEditor(token) || isNationalEditor(token);
+  return isInternationalEditor(token) || isNationalEditor(token) || isIndicatorEditor(token);
+}
+export function isIndicatorEditor (token) {
+  const decoded = decode(token);
+  return decoded.roles && decoded.roles.indexOf('indicator editor') > -1;
 }
 
 export function isAdmin (token) {

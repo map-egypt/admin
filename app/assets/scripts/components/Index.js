@@ -10,7 +10,7 @@ class Index extends React.Component {
       <div>
         {(auth.isInternationalEditor() || auth.isAdmin()) && <ProjectList auth={auth} type={'international'} limit={5} />}
         {(auth.isNationalEditor() || auth.isAdmin()) && <ProjectList auth={auth} type={'national'} limit={5} />}
-        <IndicatorList auth={auth} limit={5} />
+        {(auth.isIndicatorEditor() || auth.isAdmin()) && < IndicatorList auth={auth} limit={5} />}
       </div>
     );
   }
