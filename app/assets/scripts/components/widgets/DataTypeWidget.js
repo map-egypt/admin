@@ -22,22 +22,22 @@ export default class DataTypeWidget extends React.Component {
         <label className="control-label">{this.props.schema.title}</label>
         <select value={this.state.category} className="form-control" onChange={this.onChange.bind(this)}>
           <option value="-1">Select the type of data</option>
-          <option value="Sequential">Sequential</option>
-          <option value="Diverging">Diverging</option>
-          <option value="Categorical">Categorical</option>
+          <option value="Sequential">Sequential - متتابع</option>
+          <option value="Diverging">Diverging - متشعب</option>
+          <option value="Categorical">Categorical - تصنيفي</option>
         </select>
         <div className="field-example">
           <h3 className="header-small">Type of Data Examples</h3>
           <div className="field-example-item">
-            <h4 className="header-smallest">Sequential</h4>
+            <h4 className="header-smallest">Sequential - متتابع</h4>
             <p>Data is an increasing or decreasing range</p>
           </div>
           <div className="field-example-item">
-            <h4 className="header-smallest">Diverging</h4>
+            <h4 className="header-smallest">Diverging - متشعب</h4>
             <p>Data highlights two opposing extremes</p>
           </div>
           <div className="field-example-item">
-            <h4 className="header-smallest">Categorical</h4>
+            <h4 className="header-smallest">Categorical - تصنيفي</h4>
             <p>Data represents different categories</p>
           </div>
         </div>
