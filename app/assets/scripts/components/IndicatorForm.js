@@ -21,10 +21,10 @@ export const schema = {
       type: 'string'
     },
     published: {
-      title: 'Visibility - مدى وضوح المشروع',
+      title: 'Visibility - الرؤية',
       type: 'boolean',
       default: false,
-      enumNames: ['Published - تم النشر/ الاصدار', 'Draft - مسودة (نسخة أولية)']
+      enumNames: ['Published -نشر', 'Draft - مسودة']
     },
     category: {
       title: 'Type of Data - نمط البيانات',
