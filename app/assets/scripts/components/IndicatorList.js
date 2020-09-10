@@ -30,9 +30,14 @@ class IndicatorList extends React.Component {
     let { list } = component.state;
     list = sortBy(list, [o => o.name.toLowerCase(), o => moment(o.created_at)]); // Sort by na,e, then created_at
     const listItems = list.map((item) => {
+      let categories;
+      if (item.theme) {
+        categories = item.theme.map((obj) => `${obj.en} - ${obj.ar}`);
+      }
       return (
         <tr key={item.id}>
         <td><Link to={`/indicators/${item.id}`} className="link--primary">{item.name}</Link></td>
+        <td>{categories && categories.join(', ')}</td>
         <td>{moment(item.updated_at).format('YYYY-MM-DD')}</td>
         <td>{moment(item.created_at).format('YYYY-MM-DD')}</td>
         <td>{item.published ? '✓' : ''}</td>
@@ -52,6 +57,7 @@ class IndicatorList extends React.Component {
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Updated</th>
                 <th>Created</th>
                 <th>Published</th>
