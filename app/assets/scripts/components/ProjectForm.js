@@ -108,13 +108,16 @@ export const schema = {
     implementing_partners_ar: {type: 'string', title: 'الشركاء المنفذين'},
     project_link: {title: 'Project Link - الرابط الالكتروني للمشروع', type: 'string', format: 'uri'},
     number_served: {
-      type: 'object',
+      type: 'array',
       title: 'Number of Beneficiaries - عدد المستفيدين/ المستفيدات ',
-      required: ['number_served', 'number_served_unit'],
-      properties: {
-        number_served: {type: 'number', title: 'Number - العدد', 'description': 'e.g. 2000'},
-        number_served_unit: {type: 'string', title: 'Unit', 'description': 'e.g. Households Served'},
-        number_served_unit_ar: {type: 'string', title: 'الفئة', 'description': 'مثال: الاسر المستفيدة'}
+      items: {
+        type: 'object',
+        required: ['number_served', 'number_served_unit'],
+        properties: {
+          number_served: {type: 'number', title: 'Number - العدد', 'description': 'e.g. 2000'},
+          number_served_unit: {type: 'string', title: 'Unit', 'description': 'e.g. Households Served'},
+          number_served_unit_ar: {type: 'string', title: 'الفئة', 'description': 'مثال: الاسر المستفيدة'}
+        }
       }
     },
     sds_indicator: {
@@ -470,17 +473,19 @@ class ProjectForm extends React.Component {
         classNames: 'ar section-half section-half-left label-lower'
       },
       number_served: {
-        classNames: 'field-half form-less-spacing',
-        number_served: {
-          'ui:field': 'customnumber'
-        },
-        number_served_unit: {
-          classNames: 'padding-right',
-          'ui:field': 'customtext'
-        },
-        number_served_unit_ar: {
-          classNames: 'ar form-float-right',
-          'ui:field': 'customtext'
+        classNames: 'form-block multiform-group',
+        items: {
+          number_served: {
+            'ui:field': 'customnumber'
+          },
+          number_served_unit: {
+            classNames: 'padding-right',
+            'ui:field': 'customtext'
+          },
+          number_served_unit_ar: {
+            classNames: 'ar form-float-right',
+            'ui:field': 'customtext'
+          }
         }
       },
       percent_complete: {
