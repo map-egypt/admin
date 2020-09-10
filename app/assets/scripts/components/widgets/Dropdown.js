@@ -38,7 +38,7 @@ export default function (label, helpText, enumOptions, arEnumOptions, required) 
               <option key='-1' value='-1'>{helpText}</option>
               {
                 enumOptions.map((option, i) => {
-                  return <option key={i} value={i}>{arEnumOptions.length > 0 ? option + ' - ' + arEnumOptions[i] : option }</option>;
+                  return <option key={i} value={i}>{option} - {arEnumOptions[i]}</option>;
                 })
               }
             </select>
