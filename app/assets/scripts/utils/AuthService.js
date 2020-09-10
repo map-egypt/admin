@@ -1,4 +1,4 @@
-import { isTokenExpired, isInternationalEditor, isNationalEditor, isAdmin, isEditor, sub } from './jwtHelper';
+import { isTokenExpired, isInternationalEditor, isNationalEditor, isAdmin, isEditor, isIndicatorEditor, sub } from './jwtHelper';
 
 import reqwest from 'reqwest';
 import auth0 from 'auth0-js';
@@ -67,6 +67,10 @@ export default class AuthService {
   isInternationalEditor () {
     const token = this.getToken();
     return isInternationalEditor(token);
+  }
+  isIndicatorEditor () {
+    const token = this.getToken();
+    return isIndicatorEditor(token);
   }
   getSub () {
     const token = this.getToken();
