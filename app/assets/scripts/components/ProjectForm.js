@@ -213,7 +213,18 @@ export const schema = {
             type: 'object',
             required: ['en'],
             properties: {en: {type: 'string', title: 'Type of Fund'}, ar: {type: 'string'}}
-          }
+          },
+          loan_details: {
+            title: 'kokokwwww',// 'Loan Details( FOR LOAN TYPE ONLY) - (تفاصيل القرض (في حالة القروض فقط',
+            type: 'object',
+            properties: {
+              interest_rate: {type: 'number', title: 'Interest Rate - سعر الفائدة'},
+              grace_period: {type: 'number', title: 'Grace Period - الفائدة السنوية'},
+              number_of_installments: {type: 'number', title: 'Number Of Installments - عدد الاقساط'},
+              duration_of_repayment_en: {type: 'string', title: 'Duration of Repayment'},
+              duration_of_repayment_ar: {type: 'string', title: 'مدة السداد'}
+            }
+          },
         }
       }
     },
@@ -543,7 +554,7 @@ class ProjectForm extends React.Component {
           donor_name_ar: {
             classNames: 'ar',
             'ui:field': 'select-donor-arabic'
-          }
+          },
         }
       },
       disbursed: {
