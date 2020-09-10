@@ -16,8 +16,16 @@ class IndicatorList extends React.Component {
     const component = this;
     component.props.auth.request(`${apiRoot}/indicators`, 'get')
       .then(function (resp) {
+        let list = resp;
+        let sub = component.props.auth.getSub();
+        // If we're not the admin filter the list
+        if (!component.props.auth.isAdmin()) {
+          list = list.filter((project) => {
+            return project.owner === sub;
+          });
+        }
         component.setState({
-          list: resp
+          list: list
         });
       });
   }
@@ -47,12 +55,13 @@ class IndicatorList extends React.Component {
       // filter out items if we have a limit
       return component.props.limit ? i < component.props.limit : true;
     });
+    const {auth, limit} = component.props;
 
     return (
       <div className="section">
         <div className="wrapper-content">
           <h2 className="header-page-main">{ component.props.limit ? 'Recently Added ' : ''}Indicators</h2>
-          <Link to='indicators/new' className="btn button--primary button-section-header button--small">Add an Indicator</Link>
+          {(auth.isIndicatorEditor() || auth.isAdmin()) && <Link to='indicators/new' className="btn button--primary button-section-header button--small">Add an Indicator</Link>}
           <table className="table">
             <thead>
               <tr>
@@ -67,9 +76,8 @@ class IndicatorList extends React.Component {
               {listItems}
             </tbody>
           </table>
-          { component.props.limit // only show view all button if we have a limit
-            ? <Link to='indicators' className="link--primary">View All</Link>
-            : ''
+          { (limit && list.length > limit) && // only show view all button if we have a limit
+             <Link to='indicators' className="link--primary">View All</Link>
           }
         </div>
       </div>
