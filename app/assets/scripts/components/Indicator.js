@@ -74,7 +74,7 @@ class Indicator extends React.Component {
           const typeDisplayMap = {
             'sds': 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
             'sdg': 'SDG Goal - هدف التنمية المستدامة',
-            'other': 'Other Development Indicator'
+            'other': 'Other Development Indicator - مؤشرات اجتماعية و اقتصادية اخرى'
           };
           const indicators = indicator[key].map((item) => <li>{typeDisplayMap[item.type]} - {item.en} - {item.ar}</li>);
           return <li key={key}><label>{keys[key].title}</label><ul>{indicators}</ul></li>;

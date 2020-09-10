@@ -4,7 +4,7 @@ import {sdsLabels, sdgLabels, otherDevLabels} from '../../utils/labels';
 const typeDisplayMap = {
   'sds': 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
   'sdg': 'SDG Goal - هدف التنمية المستدامة',
-  'other': 'Other Development Indicator - مؤشرات التنمية الأخرى '
+  'other': 'Other Development Indicator - مؤشرات اجتماعية و اقتصادية اخرى '
 };
 
 const typeChooser = {
