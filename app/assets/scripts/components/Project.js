@@ -110,11 +110,11 @@ class Project extends React.Component {
           return <li key={key}><label>{keys[key].title}</label><ul>{indicators}</ul></li>;
         } else if (key === 'budget' && project[key].length > 0) {
           // using index in key attribute because array didn't have unique key
-          const funds = project[key].map((fund, i) => <li key={i} className="preview-item">{fund.donor_name + ': ' + ' $' + fund.fund.amount}</li>);
+          const funds = project[key].map((fund, i) => <li key={i} className="preview-item">{fund.donor.en + ' - ' + fund.donor.ar + ': ' + ' $' + fund.fund.amount}</li>);
           return <li key={key}><label>{keys[key].title}</label><ul>{funds}</ul></li>;
         } else if (key === 'disbursed' && project[key].length > 0) {
           // using index in key attribute because array didn't have unique key
-          const disbursed = project[key].map((fund, i) => <li key={i} className="preview-item">{fund.donor_name + ': ' + fund.type.en + ' $' + fund.fund.amount + ' ' + fund.date}</li>);
+          const disbursed = project[key].map((fund, i) => <li key={i} className="preview-item">{fund.donor.en + ' - ' + fund.donor.ar + ': ' + fund.type.en + ' $' + fund.fund.amount + ' ' + fund.date}</li>);
           return <li key={key}><label>{keys[key].title}</label><ul>{disbursed}</ul></li>;
         } else if (key === 'kmi' && project[key].length > 0) {
           // using index in key attribute because array didn't have unique key

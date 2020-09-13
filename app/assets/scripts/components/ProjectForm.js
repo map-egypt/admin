@@ -8,7 +8,7 @@ import CustomTextWidget from './widgets/CustomTextWidget';
 import CustomNumberWidget from './widgets/CustomNumberWidget';
 import Dropdown from './widgets/Dropdown';
 import {setMaybe, transformErrors} from '../utils/nullUtils';
-import {sdsLabels, sdgLabels, fundLabelsInter, fundLabelsNational} from '../utils/labels';
+import {sdsLabels, sdgLabels, fundLabelsInter, fundLabelsNational, donors} from '../utils/labels';
 
 export const schema = {
   type: 'object',
@@ -185,7 +185,7 @@ export const schema = {
       type: 'array',
       items: {
         type: 'object',
-        required: ['fund', 'donor_name'],
+        required: ['fund', 'donor'],
         properties: {
           fund: {
             type: 'object',
@@ -197,13 +197,11 @@ export const schema = {
               original: {type: 'number', title: 'Original Amount'}
             }
           },
-          donor_name: {
-            type: 'string',
-            title: 'Donor or Contributor Name'
-          },
-          donor_name_ar: {
-            type: 'string',
-            title: 'الجهة المانحة'
+          donor: {
+            title: 'Donor or Contributor Name - الجهة المانحة',
+            type: 'object',
+            required: ['en'],
+            properties: {en: {type: 'string', title: 'Donor or Contributor Name'}, ar: {type: 'string'}}
           },
           type: {
             title: 'Type of Fund',
@@ -230,7 +228,7 @@ export const schema = {
       type: 'array',
       items: {
         type: 'object',
-        required: ['fund', 'donor_name', 'type', 'date'],
+        required: ['fund', 'donor', 'type', 'date'],
         properties: {
           fund: {
             type: 'object',
@@ -242,13 +240,11 @@ export const schema = {
               original: {type: 'number', title: 'Original Amount'}
             }
           },
-          donor_name: {
-            type: 'string',
-            title: 'Donor Name'
-          },
-          donor_name_ar: {
-            type: 'string',
-            title: 'المانح'
+          donor: {
+            title: 'Donor or Contributor Name - الجهة المانحة',
+            type: 'object',
+            required: ['en'],
+            properties: {en: {type: 'string', title: 'Donor or Contributor Name'}, ar: {type: 'string'}}
           },
           type: {
             title: 'Type of Fund',
@@ -545,12 +541,7 @@ class ProjectForm extends React.Component {
         items: {
           fund: {'ui:field': 'currency'},
           type: {'ui:field': 'select-disbursed-type'},
-          donor_name: {
-            classNames: 'with-ar'
-          },
-          donor_name_ar: {
-            classNames: 'ar'
-          }
+          donor: {'ui:field': 'select-donor'}
         }
       },
       disbursed: {
@@ -559,12 +550,7 @@ class ProjectForm extends React.Component {
           fund: {'ui:field': 'currency'},
           date: {'ui:field': 'fund-date'},
           type: {'ui:field': 'select-disbursed-type'},
-          donor_name: {
-            classNames: 'with-ar'
-          },
-          donor_name_ar: {
-            classNames: 'ar'
-          }
+          donor: {'ui:field': 'select-donor'}
         }
       },
       kmi: {
@@ -725,6 +711,13 @@ class ProjectForm extends React.Component {
         'select-kmi_status': Dropdown('Status', 'Select a status - يُرجى اختيار الوضع/ الحالة',
           ['Not Implemented', 'Partially Implemented', 'Implemented', 'N/A'],
           ['لم يتحقق', ' تحقق جزئياً', ' تحقق بالكامل', 'N/A']
+        ),
+        'select-donor': Dropdown(
+          'Donor - الجهة المانحة',
+          'Select a donor - يُرحى اختيار الجهة المانحة',
+          donors.en,
+          donors.ar,
+          true
         )
       }}
       uiSchema = {this.state.uiSchema}
