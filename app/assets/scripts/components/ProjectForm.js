@@ -338,7 +338,7 @@ const InternationalSubSectors = {
     'البنية التحتية بالمناطق الريفية والري'
   ]
 };
-const DomesticSubSectors = {
+const NationalSubSectors = {
   'en_sub_sector': [
     'Agriculture Extension & Research',
     'Rural Infrastructure & Irrigation'
@@ -361,8 +361,8 @@ class ProjectForm extends React.Component {
       this.state.isDraft = true;
     }
     // get sub_sectors according to project type
-    this.state.subSectors = props.projectType === 'international' ? InternationalSubSectors['en_sub_sector'] : DomesticSubSectors['en_sub_sector'];
-    this.state.arabicsubSectors = props.projectType === 'international' ? InternationalSubSectors['ar_sub_sector'] : DomesticSubSectors['ar_sub_sector'];
+    this.state.subSectors = props.projectType === 'international' ? InternationalSubSectors['en_sub_sector'] : NationalSubSectors['en_sub_sector'];
+    this.state.arabicsubSectors = props.projectType === 'international' ? InternationalSubSectors['ar_sub_sector'] : NationalSubSectors['ar_sub_sector'];
     // get type of fund according to project type
     this.state.typeFund = props.projectType === 'international' ? fundLabelsInter.en : fundLabelsNational.en;
     this.state.typeFundArabic = props.projectType === 'international' ? fundLabelsInter.ar : fundLabelsNational.ar;
