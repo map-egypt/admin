@@ -340,12 +340,24 @@ const InternationalSubSectors = {
 };
 const NationalSubSectors = {
   'en_sub_sector': [
-    'Agriculture Extension & Research',
-    'Rural Infrastructure & Irrigation'
+    'Minister\'s Office Affairs',
+    'Agricultural Services and Monitoring',
+    'Agricultural Extension',
+    'Livestock, Fisheries, and Poultry',
+    'Land Reclamation',
+    'Economic Affairs',
+    'Financial and Administrative Affairs',
+    'Executive Agency for Comprehensive Development Projects (EACDP)'
   ],
   'ar_sub_sector': [
-    'الارشاد الزراعي والبحث',
-    'البنية التحتية بالمناطق الريفية والري'
+    'قطاع مكتب الوزير',
+    'قطاع الخدمات والمتابعة',
+    'قطاع الارشاد الزراعي',
+    'قطاع تنمية الثروة الحيوانية والسمكية والداجنة',
+    'قطاع استصلاح الأراضي',
+    'قطاع الشئون الاقتصادية',
+    'قطاع الشئون المالية والتنمية الادارية',
+    'الجهاز التنفيذي لمشروعات التنمية الشاملة'
   ]
 };
 class ProjectForm extends React.Component {
