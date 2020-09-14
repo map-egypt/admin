@@ -81,7 +81,8 @@ class Project extends React.Component {
         } else if (key === 'published') {
           return <li key={key}><label>{keys[key].title}</label>{ project[key] ? 'Published' : 'Draft' }</li>;
         } else if (key === 'number_served') {
-          return <li key={key}><label>{keys[key].title}</label>{ project[key].number_served + ' ' + project[key].number_served_unit}</li>;
+          return (<li key={key}><label>{keys[key].title}</label>{project[key].number_served + ' ' +
+          project[key].beneficiary_type.en + ' - ' + project[key].beneficiary_type.ar}</li>);
         } else if (key === 'components') {
           // using index in key attribute because array didn't have unique key
           const items = project[key].map((item, i) => <li key={i} className="preview-item">{item.component + ' - ' + item.component_ar}</li>);

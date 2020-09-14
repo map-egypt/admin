@@ -8,7 +8,7 @@ import CustomTextWidget from './widgets/CustomTextWidget';
 import CustomNumberWidget from './widgets/CustomNumberWidget';
 import Dropdown from './widgets/Dropdown';
 import {setMaybe, transformErrors} from '../utils/nullUtils';
-import {sdsLabels, sdgLabels, fundLabelsInter, fundLabelsNational, donors} from '../utils/labels';
+import {sdsLabels, sdgLabels, fundLabelsInter, fundLabelsNational, donors, beneficiaryTypes} from '../utils/labels';
 
 export const schema = {
   type: 'object',
@@ -110,11 +110,15 @@ export const schema = {
     number_served: {
       type: 'object',
       title: 'Number of Beneficiaries - عدد المستفيدين/ المستفيدات ',
-      required: ['number_served', 'number_served_unit'],
+      required: ['number_served', 'beneficiary_type'],
       properties: {
-        number_served: {type: 'number', title: 'Number - العدد', 'description': 'e.g. 2000'},
-        number_served_unit: {type: 'string', title: 'Unit', 'description': 'e.g. Households Served'},
-        number_served_unit_ar: {type: 'string', title: 'الفئة', 'description': 'مثال: الاسر المستفيدة'}
+        number_served: {type: 'number', title: 'Number - العدد'},
+        beneficiary_type: {
+          title: 'Unit - الفئة',
+          type: 'object',
+          required: ['en'],
+          properties: {en: {type: 'string', title: 'Unit'}, ar: {type: 'string'}}
+        }
       }
     },
     sds_indicator: {
@@ -477,17 +481,8 @@ class ProjectForm extends React.Component {
       },
       number_served: {
         classNames: 'field-half form-less-spacing',
-        number_served: {
-          'ui:field': 'customnumber'
-        },
-        number_served_unit: {
-          classNames: 'padding-right',
-          'ui:field': 'customtext'
-        },
-        number_served_unit_ar: {
-          classNames: 'ar form-float-right',
-          'ui:field': 'customtext'
-        }
+        number_served: {'ui:field': 'customnumber'},
+        beneficiary_type: {'ui:field': 'select-beneficiary-type'}
       },
       percent_complete: {
         'ui:widget': 'range'
@@ -714,9 +709,16 @@ class ProjectForm extends React.Component {
         ),
         'select-donor': Dropdown(
           'Donor - الجهة المانحة',
-          'Select a donor - يُرحى اختيار الجهة المانحة',
+          'Select a donor - يُرجى اختيار الجهة المانحة',
           donors.en,
           donors.ar,
+          true
+        ),
+        'select-beneficiary-type': Dropdown(
+          'Unit - الفئة',
+          'Select a unit - يُرجى اختيار الفئة',
+          beneficiaryTypes.en,
+          beneficiaryTypes.ar,
           true
         )
       }}

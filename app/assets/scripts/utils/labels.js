@@ -223,5 +223,27 @@ module.exports = {
       'برنامج الأغذية العالمي',
       'المركز الدولي للأسماك'
     ]
+  },
+  beneficiaryTypes: {
+    en: [
+      'Women',
+      'Men',
+      'Small Farmers (Less than 5 feddan)',
+      'Large Farmers (5 feddan or more)',
+      'Households',
+      'Youth',
+      'Female Head of Household',
+      'Bedouins'
+    ],
+    ar: [
+      'سيدات',
+      'رجال',
+      'مزارعين صغار (أقل من 5 فدان)',
+      'مزارعين كبار (5 فدان أو أكثر)',
+      'أسر معيشية',
+      'شباب',
+      'امراة معيلة',
+      'بدو'
+    ]
   }
 };
