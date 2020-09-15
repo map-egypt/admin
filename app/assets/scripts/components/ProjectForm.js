@@ -108,16 +108,19 @@ export const schema = {
     implementing_partners_ar: {type: 'string', title: 'الشركاء المنفذين'},
     project_link: {title: 'Project Link - الرابط الالكتروني للمشروع', type: 'string', format: 'uri'},
     number_served: {
-      type: 'object',
       title: 'Number of Beneficiaries - عدد المستفيدين/ المستفيدات ',
-      required: ['number_served', 'beneficiary_type'],
-      properties: {
-        number_served: {type: 'number', title: 'Number - العدد'},
-        beneficiary_type: {
-          title: 'Unit - الفئة',
-          type: 'object',
-          required: ['en'],
-          properties: {en: {type: 'string', title: 'Unit'}, ar: {type: 'string'}}
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['number_served', 'beneficiary_type'],
+        properties: {
+          number_served: {type: 'number', title: 'Number - العدد'},
+          beneficiary_type: {
+            title: 'Unit - الفئة',
+            type: 'object',
+            required: ['en'],
+            properties: {en: {type: 'string', title: 'Unit'}, ar: {type: 'string'}}
+          }
         }
       }
     },
@@ -480,9 +483,11 @@ class ProjectForm extends React.Component {
         classNames: 'ar section-half section-half-left label-lower'
       },
       number_served: {
-        classNames: 'field-half form-less-spacing',
-        number_served: {'ui:field': 'customnumber'},
-        beneficiary_type: {'ui:field': 'select-beneficiary-type'}
+        classNames: 'form-block columns-small multiform-group',
+        items: {
+          number_served: {'ui:field': 'customnumber'},
+          beneficiary_type: {'ui:field': 'select-beneficiary-type'}
+        }
       },
       percent_complete: {
         'ui:widget': 'range'
