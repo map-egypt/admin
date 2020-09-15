@@ -38,10 +38,10 @@ export const schema = {
       type: 'string'
     },
     published: {
-      title: 'Visibility - مدى وضوح المشروع', 'description': 'Draft information will be saved but not published on the website - سيتم حفظ معلومات المسودة ولكن لن يتم نشرها على الموقع',
+      title: 'Visibility - الرؤية', 'description': 'Draft information will be saved but not published on the website - سيتم حفظ معلومات المسودة ولكن لن يتم نشرها على الموقع',
       type: 'boolean',
       default: false,
-      enumNames: ['Ready for publishing - جاهز للنشر', 'Draft - مسودة']
+      enumNames: ['publish - نشر', 'Draft - مسودة']
     },
     components: {
       title: 'Project Components - (مكونات المشروع (الأهداف المحددة وأنشطة المشروع',
@@ -221,7 +221,7 @@ export const schema = {
             type: 'object',
             properties: {
               interest_rate: {type: 'number', title: 'Interest Rate - سعر الفائدة'},
-              grace_period: {type: 'number', title: 'Grace Period - الفائدة السنوية'},
+              grace_period: {type: 'number', title: 'Grace Period - فترة السداد'},
               number_of_installments: {type: 'number', title: 'Number Of Installments - عدد الاقساط'},
               duration_of_repayment_en: {type: 'string', title: 'Duration of Repayment'},
               duration_of_repayment_ar: {type: 'string', title: 'مدة السداد'}
@@ -283,7 +283,7 @@ export const schema = {
           },
           kpi: {
             type: 'string',
-            title: 'KPI'
+            title: 'Key Performance Indicator'
           },
           kpi_ar: {
             type: 'string',
@@ -651,7 +651,7 @@ class ProjectForm extends React.Component {
         'currency': CurrencyField,
         'select-status': Dropdown(
           'Project Status - وضع/ حالة المشروع',
-          'Select a status - يُرجى اختيار وضع محدد (حالة محددة)',
+          'Select a status - يُرجى اختيار وضع محدد',
           [
             'Planned',
             'Ongoing',
