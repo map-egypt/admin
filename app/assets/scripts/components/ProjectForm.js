@@ -368,6 +368,10 @@ class ProjectForm extends React.Component {
     super(props);
 
     this.state = {};
+    if (props.projectType === 'national') {
+      schema.properties.reportLink.format = 'data-url';
+      schema.properties.project_link.format = 'data-url';
+    }
     this.state.schema = schema;
     this.state.formData = this.props.formData;
     if (this.state.formData && 'published' in this.state.formData) {
@@ -579,7 +583,6 @@ class ProjectForm extends React.Component {
       reportLink: {
         title: 'Report link',
         'ui:placeholder': 'http://',
-        'ui:disabled': props.projectType !== 'national'
       },
       recommendations: {
         classNames: 'with-ar',
