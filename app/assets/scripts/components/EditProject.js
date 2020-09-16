@@ -17,23 +17,64 @@ class EditProject extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
+  fileBase64 (file, fileName) {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        var fileInfo = reader.result.split(',')[0].split(';');
+        var header = `${fileInfo[0]};name=${fileName};${fileInfo[1]}`;
+        resolve(`${header},${reader.result.split(',')[1]}`);
+      };
+      reader.onerror = function(error) {
+        reject(error);
+      };
+    });
+  }
+
+
 
   componentWillMount () {
     const component = this;
     const id = component.props.location.pathname
       .replace('/projects/', '')
-      .replace('/edit', '')
-    ;
-
+      .replace('/edit', '');
     component.props.auth.request(`${apiRoot}/projects/${id}`, 'get')
-      .then(function (resp) {
-        component.setState({
-          project: resp,
-          id: id
+        .then(function (resp) {
+          if(resp.data.reportLink) {
+            fetch(`${apiRoot}/uploaded/${resp.data.reportLink}`).then(r => r.blob()).then(blob => {
+              component.fileBase64(blob, resp.data.reportLink).then(base64 =>{
+                resp.data.reportLink = base64;
+                if(resp.data.project_link){
+                  fetch(`${apiRoot}/uploaded/${resp.data.project_link}`).then(r => r.blob()).then(blob => {
+                    component.fileBase64(blob, resp.data.project_link).then(base64 =>{
+                      resp.data.project_link = base64;
+                      component.setState({project: resp, id: id });
+                    });
+
+                  });
+
+                }else{
+                  component.setState({project: resp, id: id });
+                }
+              });
+            });
+          }else if(resp.data.project_link){
+                  fetch(`${apiRoot}/uploaded/${resp.data.project_link}`).then(r => r.blob()).then(blob => {
+                    component.fileBase64(blob, resp.data.project_link).then(base64 =>{
+                      resp.data.project_link = base64;
+                      component.setState({project: resp, id: id });
+                    });
+
+                  });
+
+                }
+          else{
+              component.setState({project: resp, id: id });
+          }
+        }).fail(function (err, msg) {
+          console.error('error', err, msg);
         });
-      }).fail(function (err, msg) {
-        console.error('error', err, msg);
-      });
   }
 
   handleSubmit ({formData}) {
