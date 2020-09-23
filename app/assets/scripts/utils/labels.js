@@ -4,15 +4,13 @@ module.exports = {
       'Pillar 1: Economic Development',
       'Pillar 2: Energy',
       'Pillar 3: Knowledge, Innovation and Scientific Research',
-      'Pillar 4: Transparency and Efficiency of Government Institutions',
+      'Pillar 4: Transparency & Efficient Government Institutions',
       'Pillar 5: Social Justice',
       'Pillar 6: Health',
       'Pillar 7: Education & Training',
       'Pillar 8: Culture',
       'Pillar 9: Environment',
-      'Pillar 10: Urban Development',
-      'Pillar 11: National Security and Foreign Policy',
-      'Pillar 12: Domestic Policy'
+      'Pillar 10: Urban Development'
     ],
     'ar': [
       'المحور الأول: التنمية الاقتصادية',
@@ -24,9 +22,7 @@ module.exports = {
       'المحور السابع: التعليم والتدريب',
       'المحور الثامن: الثقافة',
       'المحور التاسع: البيئة',
-      'المحور العاشر: التنمية العمرانية',
-      'المعرفـة واالبتـكار والبحث العلمي',
-      'السياسة المحلية'
+      'المحور العاشر: التنمية العمرانية'
     ],
     'select': 'Select an SDS goal - يُرجى اختيار أحد أهداف استراتيجية التنمية المستدامة التى يتناولها المشروع'
   },
