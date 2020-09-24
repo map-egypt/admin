@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import moment from 'moment';
 import {reverseGovernorateMap, districtLookup} from '../utils/locationNames';
 
+
 const config = require('../config');
 const apiRoot = config.api_root;
 
@@ -79,7 +80,7 @@ class ProjectList extends React.Component {
     return (
       <div className="section">
         <div className="wrapper-content">
-          <h2 className="header-page-main">{ limit ? 'Recently Added ' : ''}{type} Projects</h2>
+          <h2 className="header-page-main">{ limit ? 'Recently Added ' : ''}{type[0].toUpperCase() + type.substring(1)} Projects</h2>
           {type === 'international' ? (auth.isInternationalEditor() || auth.isAdmin()) && <Link to={`projects/${type}/new`} className="btn button--primary button-section-header button--small">Add a {type} Project</Link> : (auth.isNationalEditor() || auth.isAdmin()) &&
           <Link to={`projects/${type}/new`} className="btn button--primary button-section-header button--small">Add a {type} Project</Link>
           }
