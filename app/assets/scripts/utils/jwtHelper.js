@@ -31,13 +31,27 @@ export function isNationalEditor (token) {
   const decoded = decode(token);
   return decoded.roles && decoded.roles.indexOf('national editor') > -1;
 }
-
+export function isInternationalReviewer (token) {
+  const decoded = decode(token);
+  return decoded.roles && decoded.roles.indexOf('international reviewer') > -1;
+}
+export function isNationalReviewer (token) {
+  const decoded = decode(token);
+  return decoded.roles && decoded.roles.indexOf('national reviewer') > -1;
+}
 export function isEditor (token) {
   return isInternationalEditor(token) || isNationalEditor(token) || isIndicatorEditor(token);
 }
 export function isIndicatorEditor (token) {
   const decoded = decode(token);
   return decoded.roles && decoded.roles.indexOf('indicator editor') > -1;
+}
+export function isIndicatorReviewer (token) {
+  const decoded = decode(token);
+  return decoded.roles && decoded.roles.indexOf('indicator reviewer') > -1;
+}
+export function isReviewer (token) {
+  return isInternationalReviewer(token) || isNationalReviewer(token) || isIndicatorReviewer(token);
 }
 
 export function isAdmin (token) {

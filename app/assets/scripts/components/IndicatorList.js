@@ -19,7 +19,7 @@ class IndicatorList extends React.Component {
         let list = resp;
         let sub = component.props.auth.getSub();
         // If we're not the admin filter the list
-        if (!component.props.auth.isAdmin()) {
+        if (!(component.props.auth.isAdmin() || component.props.auth.isIndicatorReviewer())) {
           list = list.filter((project) => {
             return project.owner === sub;
           });

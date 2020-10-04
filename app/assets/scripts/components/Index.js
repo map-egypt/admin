@@ -8,9 +8,9 @@ class Index extends React.Component {
     const {auth} = this.props;
     return (
       <div>
-        {(auth.isInternationalEditor() || auth.isAdmin()) && <ProjectList auth={auth} type={'international'} limit={5} />}
-        {(auth.isNationalEditor() || auth.isAdmin()) && <ProjectList auth={auth} type={'national'} limit={5} />}
-        {(auth.isIndicatorEditor() || auth.isAdmin()) && < IndicatorList auth={auth} limit={5} />}
+        {(auth.isInternationalEditor() || auth.isInternationalReviewer() || auth.isAdmin()) && <ProjectList auth={auth} type={'international'} limit={5} />}
+        {(auth.isNationalEditor() || auth.isNationalReviewer() || auth.isAdmin()) && <ProjectList auth={auth} type={'national'} limit={5} />}
+        {(auth.isIndicatorEditor() || auth.isIndicatorReviewer() || auth.isAdmin()) && < IndicatorList auth={auth} limit={5} />}
       </div>
     );
   }

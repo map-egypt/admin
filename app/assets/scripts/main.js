@@ -28,17 +28,17 @@ const requireAuth = (nextState, replace) => {
 };
 // create function to check type of editor
 const checkInterEditor = (nextState, replace) => {
-  if (!(auth.isInternationalEditor() || auth.isAdmin())) {
+  if (!(auth.isInternationalEditor() || auth.isInternationalReviewer() || auth.isAdmin())) {
     replace({ pathname: '/' });
   }
 };
 const checknationalEditor = (nextState, replace) => {
-  if (!(auth.isNationalEditor() || auth.isAdmin())) {
+  if (!(auth.isNationalEditor() || auth.isNationalReviewer() || auth.isAdmin())) {
     replace({ pathname: '/' });
   }
 };
 const checkIndicatorsEditor = (nextState, replace) => {
-  if (!(auth.isIndicatorEditor() || auth.isAdmin())) {
+  if (!(auth.isIndicatorEditor() || auth.isIndicatorReviewer() || auth.isAdmin())) {
     replace({ pathname: '/' });
   }
 };

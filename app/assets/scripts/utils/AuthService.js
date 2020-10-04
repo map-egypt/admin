@@ -1,4 +1,7 @@
-import { isTokenExpired, isInternationalEditor, isNationalEditor, isAdmin, isEditor, isIndicatorEditor, sub } from './jwtHelper';
+import {
+  isTokenExpired, isInternationalEditor, isNationalEditor, isInternationalReviewer, isNationalReviewer,
+  isAdmin, isEditor, isIndicatorEditor, isIndicatorReviewer, sub, isReviewer
+} from './jwtHelper';
 
 import reqwest from 'reqwest';
 import auth0 from 'auth0-js';
@@ -48,12 +51,12 @@ export default class AuthService {
   }
   loggedIn () {
     const token = this.getToken();
-    return !!token && !isTokenExpired(token) && (isEditor(token) || isAdmin(token));
+    return !!token && !isTokenExpired(token) && (isEditor(token) || isReviewer(token) || isAdmin(token));
   }
 
   loggedInNotEditor () {
     const token = this.getToken();
-    return !!token && !isTokenExpired(token) && !(isEditor(token) || isAdmin(token));
+    return !!token && !isTokenExpired(token) && !(isEditor(token) || isReviewer(token) || isAdmin(token));
   }
 
   isAdmin () {
@@ -71,6 +74,18 @@ export default class AuthService {
   isIndicatorEditor () {
     const token = this.getToken();
     return isIndicatorEditor(token);
+  }
+  isNationalReviewer () {
+    const token = this.getToken();
+    return isNationalReviewer(token);
+  }
+  isInternationalReviewer () {
+    const token = this.getToken();
+    return isInternationalReviewer(token);
+  }
+  isIndicatorReviewer () {
+    const token = this.getToken();
+    return isIndicatorReviewer(token);
   }
   getSub () {
     const token = this.getToken();

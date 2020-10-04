@@ -20,7 +20,9 @@ class ProjectList extends React.Component {
         let list = resp;
         let sub = component.props.auth.getSub();
         // If we're not the admin filter the list
-        if (!component.props.auth.isAdmin()) {
+        if (!(component.props.auth.isAdmin() || component.props.auth.isInternationalReviewer()
+            // eslint-disable-next-line operator-linebreak
+            || component.props.auth.isNationalReviewer())) {
           list = list.filter((project) => {
             return project.owner === sub;
           });
