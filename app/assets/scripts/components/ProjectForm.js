@@ -73,11 +73,11 @@ export const schema = {
     date_delay_occurrence: {type: 'string', title: 'Date Of Delay Occurrence - تاريخ حالة التأخير'},
     corrective_action: {
       type: 'string',
-      title: 'Corrective Action'
+      title: 'Project Amendments or Corrective Action'
     },
     corrective_action_ar: {
       type: 'string',
-      title: 'الإجراء التصحيحى'
+      title: 'تعديلات المشروع أو الإجراءات التصحيحية'
     },
     date_corrective_action: {type: 'string', title: 'Date Of Corrective Action -  تاريخ تنفيذ الإجراء التصحيحى'},
     treat_corrective_action: {
