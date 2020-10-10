@@ -118,20 +118,20 @@ export const schema = {
       }
     },
     sds_indicator: {
-      title: 'SDS Goals - أهداف استراتيجية التنمية المُستدامة',
+      title: 'SDS Pillars - أهداف استراتيجية التنمية المُستدامة',
       type: 'array',
       items: {
-        title: 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
+        title: 'SDS Pillars - هدف استراتيجية التنمية المُستدامة',
         type: 'object',
         required: ['en'],
         properties: {en: {type: 'string', title: 'SDS Indicator'}, ar: {type: 'string'}}
       }
     },
     sdg_indicator: {
-      title: 'SDG Goals - أهداف التنمية المستدامة',
+      title: 'SDGs - أهداف التنمية المستدامة',
       type: 'array',
       items: {
-        title: 'SDG Goal - هدف التنمية المستدامة',
+        title: 'SDGs - هدف التنمية المستدامة',
         type: 'object',
         required: ['en'],
         properties: {en: {type: 'string', title: 'SDG Indicator'}, ar: {type: 'string'}}
@@ -670,14 +670,14 @@ class ProjectForm extends React.Component {
           ]
         ),
         'select-sds_indicator': Dropdown(
-          'SDS Goal - هدف استراتيجية التنمية المُستدامة',
+          'SDS Pillars - هدف استراتيجية التنمية المُستدامة',
           sdsLabels.select,
           sdsLabels.en,
           sdsLabels.ar,
           true
         ),
         'select-sdg_indicator': Dropdown(
-          'SDG Goal - هدف التنمية المستدامة',
+          'SDGs - هدف التنمية المستدامة',
           sdgLabels.select,
           sdgLabels.en,
           sdgLabels.ar,

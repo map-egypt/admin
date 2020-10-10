@@ -2,9 +2,9 @@ import React from 'react';
 import {sdsLabels, sdgLabels, otherDevLabels} from '../../utils/labels';
 
 const typeDisplayMap = {
-  'sds': 'SDS Goal - هدف استراتيجية التنمية المُستدامة',
-  'sdg': 'SDG Goal - هدف التنمية المستدامة',
-  'other': 'Other Development Indicator - مؤشرات اجتماعية و اقتصادية اخرى '
+  'sds': 'SDS Pillars - هدف استراتيجية التنمية المُستدامة',
+  'sdg': 'SDGs - هدف التنمية المستدامة',
+  'other': 'Other Socioeconomic Indicators - مؤشرات اجتماعية و اقتصادية اخرى '
 };
 
 const typeChooser = {
