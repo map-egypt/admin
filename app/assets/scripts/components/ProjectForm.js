@@ -60,14 +60,7 @@ export const schema = {
         }
       }
     },
-    amendments: {
-      title: 'Project Amendments', 'description': 'Please indicate if there have been any major amendments to the project (for example a change in project objective, location, etc.)',
-      type: 'string'
-    },
-    amendments_ar: {
-      title: 'تعديلات المشروع', 'description': 'يرجى بيان إذا ما كانت هناك أي تعديلات رئيسية في المشروع (على سبيل المثال تغيير في أهداف المشروع، أو أماكن التنفيذ، وما إلى ذلك)',
-      type: 'string'
-    },
+  
     project_delays: {
       title: 'Project Delays',
       description: 'Please indicate any major delays in the project implementation, including the  cause of the delay',
@@ -455,14 +448,6 @@ class ProjectForm extends React.Component {
       private: {
         classNames: 'section-half section-half-left',
         'ui:widget': 'radio'
-      },
-      amendments: {
-        classNames: 'with-ar',
-        'ui:field': 'textarea'
-      },
-      amendments_ar: {
-        classNames: 'ar',
-        'ui:field': 'textarea'
       },
       project_delays: {
         classNames: 'with-ar',
